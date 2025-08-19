@@ -1,9 +1,9 @@
-from gen.evmListener import evmListener
-from gen.evmParser import evmParser
+from gen.CourseListener import CourseListener
+from gen.CourseParser import CourseParser
 from required_code_collection.ast import AST
 from required_code_collection.make_ast_subtree import make_ast_subtree
 
-class CustomevmListener(evmListener):
+class CustomCourseListener(CourseListener):
 	def __init__(self):
 		self.overridden_rules = ['program','print_variable','for_increment','params','func_body','condition'] #change
 		self.binary_operator_list = ['term','expression','variable_assignment','comparison_statement'] #change
@@ -25,3 +25,4 @@ class CustomevmListener(evmListener):
 
 
 # place to define specific functions for grammer rules 
+

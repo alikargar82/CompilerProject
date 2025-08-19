@@ -5,7 +5,6 @@ description: "One-liner on what this course covers"
 level: "beginner"   # or "intermediate" | "advanced"
 tags: ["topic-a", "topic-b"]
 
-
 # Optional student data pointers (you said this is important)
 student_data:
   roster_file: "students/roster.csv"   # or .yaml

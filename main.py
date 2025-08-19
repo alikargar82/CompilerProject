@@ -1,18 +1,18 @@
 from antlr4 import *
 import argparse
-from CustomevmListener import CustomevmListener
+from CustomCourseListener import CustomCourseListener
 from code_generator import CodeGenerator
-from gen.evmLexer import evmLexer
-from gen.evmParser import evmParser
+from gen.CourseLexer import CourseLexer
+from gen.CourseParser import CourseParser
 from required_code_collection.ast_to_networkx_graph import show_ast
 
 def main(arguments):
 	stream = FileStream(arguments.input, encoding='utf8')
-	lexer = evmLexer(stream)
+	lexer = CourseLexer(stream)
 	token_stream = CommonTokenStream(lexer)
-	parser = evmParser(token_stream)
+	parser = CourseParser(token_stream)
 	parse_tree = parser.program()
-	ast_builder_listener = CustomevmListener()
+	ast_builder_listener = CustomCourseListener()
 	ast_builder_listener.rule_names = parser.ruleNames
 	walker = ParseTreeWalker()
 	walker.walk(t=parse_tree, listener=ast_builder_listener)
@@ -23,8 +23,8 @@ def main(arguments):
 	code_gen = CodeGenerator()
 	final_code =code_gen.generate(traversal)
 	print(final_code)
-	with open('input/main.yaml','w') as evm_gen_out:
-		evm_gen_out.write(final_code)
+	with open('input/main.yaml','w') as Course_gen_out:
+		Course_gen_out.write(final_code)
 
 
 if __name__ == '__main__':
