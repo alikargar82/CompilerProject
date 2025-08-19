@@ -2,42 +2,43 @@
 name: "Course Name"
 author: "Instructor Name"
 description: "One-liner on what this course covers"
-level: "beginner"   # or "intermediate" | "advanced"
+level: beginner   # or "intermediate" | "advanced"
 tags: ["topic-a", "topic-b"]
+
 
 # Optional student data pointers (you said this is important)
 student_data:
   roster_file: "students/roster.csv"   # or .yaml
   capacity: 200                        # max seats
   classes_file: "students/classes.yaml"  # cohorts/sections
-  enrollment_mode: "open"              # "open" | "invite" | "restricted"
+  enrollment_mode: open              # "open" | "invite" | "restricted"
 
 # The only place that defines sequencing. No dates, no weights, no prereqs.
 # 'modes' is where the DSL infers tools (you never declare tools directly).
 flow:
-  - type: "registration"               # special step (no ref required)
-    modes: ["form"]                    # e.g., form, sso, external
+  - type: registration               # special step (no ref required)
+    modes: [form]                    # e.g., form, sso, external
 
-  - type: "chapter"
+  - type: chapter
     ref: "chapters/chapter1.yaml"
-    modes: ["video", "text"]           # any number of modes
+    modes: [video, text]           # any number of modes
 
-  - type: "quiz"
+  - type: quiz
     ref: "quizzes/ch1_quiz.yaml"
-    modes: ["mcq"]                     # e.g., mcq | coding | essay| file_read
+    modes: [mcq]                     # e.g., mcq | coding | essay| file_read
 
-  - type: "chapter"
+  - type: chapter
     ref: "chapters/chapter2.yaml"
-    modes: ["audio"]
+    modes: [audio]
 
-  - type: "exam"
+  - type: exam
     ref: "exams/midterm.yaml"
-    modes: ["essay"]                   # free label; compiler maps internally
+    modes: [essay]                   # free label; compiler maps internally
 
-  - type: "resource"
+  - type: resource
     ref: "resources/extra_reading.yaml"
-    modes: ["mcq"]               
+    modes: [mcq]
 
-  - type: "exam"
+  - type: exam
     ref: "exams/final.yaml"
-    modes: ["tf","essay","mcq"]
+    modes: [tf,essay,mcq]
