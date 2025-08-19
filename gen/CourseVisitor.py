@@ -1,4 +1,4 @@
-# Generated from /home/ali/compiler/Course.g4 by ANTLR 4.13.2
+# Generated from /home/ali/CompilerProject/Course.g4 by ANTLR 4.13.2
 from antlr4 import *
 if "." in __name__:
     from .CourseParser import CourseParser
@@ -29,6 +29,16 @@ class CourseVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CourseParser#capacity.
+    def visitCapacity(self, ctx:CourseParser.CapacityContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CourseParser#num.
+    def visitNum(self, ctx:CourseParser.NumContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CourseParser#flow.
     def visitFlow(self, ctx:CourseParser.FlowContext):
         return self.visitChildren(ctx)
@@ -36,6 +46,11 @@ class CourseVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CourseParser#flowItem.
     def visitFlowItem(self, ctx:CourseParser.FlowItemContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CourseParser#address.
+    def visitAddress(self, ctx:CourseParser.AddressContext):
         return self.visitChildren(ctx)
 
 

@@ -23,10 +23,14 @@ tagList
 studentData
     : 'student_data:'
       ('roster_file:' STRING)?
-      ('capacity:' INT)?
+      (capacity)?
       ('classes_file:' STRING)?
       ('enrollment_mode:' ENROLL_MODE)?
     ;
+
+capacity: 'capacity:' num;
+
+num: INT;
 
 // ===== FLOW =====
 flow
@@ -35,9 +39,11 @@ flow
 
 flowItem
     : '- type:' FLOW_TYPE
-      ('ref:'  STRING )?
+      ('ref:'  address )?
       'modes:' '[' mode_type (',' mode_type)* ']'
     ;
+
+address: STRING;
 
 mode_type
     : MODE_NAMES ;

@@ -5,10 +5,10 @@ from required_code_collection.make_ast_subtree import make_ast_subtree
 
 class CustomCourseListener(CourseListener):
 	def __init__(self):
-		self.overridden_rules = ['program','print_variable','for_increment','params','func_body','condition'] #change
-		self.binary_operator_list = ['term','expression','variable_assignment','comparison_statement'] #change
-		self.compound_rules = ['switch_statement','block_statement','case_statement','default_case','if_statement'] #change
-		self.scoped_rules = ['block_statement','if_statement','case_statement','switch_statement','default_case'] #change
+		self.overridden_rules = [  'tagList'] #change
+		self.binary_operator_list = [] #change
+		self.compound_rules = ['student_data' ] #change
+		self.scoped_rules = [ 'flowItem'] #change
 		self.rule_names = []
 		self.ast = AST()
 
@@ -26,3 +26,22 @@ class CustomCourseListener(CourseListener):
 
 # place to define specific functions for grammer rules 
 
+def exitCourseFile(self, ctx: CourseParser.CourseFileContext):
+	make_ast_subtree(self.ast, ctx, "CourseFile", keep_node=True)
+
+
+# def exitMetadata(self, ctx: CourseParser.MetadataContext):
+# 	make_ast_subtree(self.ast, ctx, "Metadata", keep_node=True)
+
+
+def exitStudentData(self, ctx: CourseParser.StudentDataContext):
+	make_ast_subtree(self.ast, ctx, "StudentData", keep_node=True)
+
+# def exitFlow(self, ctx: CourseParser.FlowContext):
+# 	make_ast_subtree(self.ast, ctx, "Flow", keep_node=True)
+
+def exitCapacity(self, ctx: CourseParser.CapacityContext):
+	make_ast_subtree(self.ast, ctx, "capacity", keep_node=True)
+
+# def exitFlowItem(self, ctx: CourseParser.FlowItemContext):
+# 	make_ast_subtree(self.ast, ctx, "FlowItem", keep_node=True)

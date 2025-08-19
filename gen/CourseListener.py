@@ -1,4 +1,4 @@
-# Generated from /home/ali/compiler/Course.g4 by ANTLR 4.13.2
+# Generated from /home/ali/CompilerProject/Course.g4 by ANTLR 4.13.2
 from antlr4 import *
 if "." in __name__:
     from .CourseParser import CourseParser
@@ -44,6 +44,24 @@ class CourseListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by CourseParser#capacity.
+    def enterCapacity(self, ctx:CourseParser.CapacityContext):
+        pass
+
+    # Exit a parse tree produced by CourseParser#capacity.
+    def exitCapacity(self, ctx:CourseParser.CapacityContext):
+        pass
+
+
+    # Enter a parse tree produced by CourseParser#num.
+    def enterNum(self, ctx:CourseParser.NumContext):
+        pass
+
+    # Exit a parse tree produced by CourseParser#num.
+    def exitNum(self, ctx:CourseParser.NumContext):
+        pass
+
+
     # Enter a parse tree produced by CourseParser#flow.
     def enterFlow(self, ctx:CourseParser.FlowContext):
         pass
@@ -59,6 +77,15 @@ class CourseListener(ParseTreeListener):
 
     # Exit a parse tree produced by CourseParser#flowItem.
     def exitFlowItem(self, ctx:CourseParser.FlowItemContext):
+        pass
+
+
+    # Enter a parse tree produced by CourseParser#address.
+    def enterAddress(self, ctx:CourseParser.AddressContext):
+        pass
+
+    # Exit a parse tree produced by CourseParser#address.
+    def exitAddress(self, ctx:CourseParser.AddressContext):
         pass
 
 
