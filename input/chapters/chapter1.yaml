@@ -1,0 +1,35 @@
+title: "Chapter Title"
+description: "Short overview of this chapter"
+objectives:
+  - "Learner can do X"
+  - "Learner understands Y"
+
+# Ordered content blocks. This file is not used for tool inference (that’s in main.yaml).
+content:
+  - type: "text"
+    title: "Concept A"
+    body: |
+      Markdown or plain text goes here…
+
+  - type: "video"
+    title: "Demo Video"
+    url: "https://example.com/video.mp4"
+    transcript: "Optional transcript text or path"
+    duration: "6m30s"     # optional
+
+  - type: "audio"
+    title: "Narration"
+    url: "https://example.com/audio.mp3"
+
+  - type: "image"
+    title: "Architecture Diagram"
+    src: "images/arch.png"
+    caption: "High-level system view"
+
+  - type: "example"
+    language: "python"
+    code: |
+      print("hello")
+    explanation: "What this code shows and why it matters."
+
+summary: "One-paragraph recap of the key ideas."

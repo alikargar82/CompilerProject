@@ -1,0 +1,58 @@
+title: "Quiz Title"
+instructions: "Short guidance for the learner"
+
+
+# Optional quiz-level settings (no dates/weights here)
+settings:
+  passing_score: 70              # percent, or treat as score depending on runtime
+  randomize_questions: true
+  attempts_allowed: 1            # optional
+  time_limit: "10m"              # optional, e.g., "10m" or "600s"
+  weight: 0.5
+
+questions:
+  # Multiple choice (single answer)
+  - type: "multiple_choice"
+    question: "What is 2 + 2?"
+    options: ["3", "4", "5"]
+    answer: "4"
+    hint: "Basic arithmetic"
+    explanation: "2 + 2 equals 4."
+
+  # True/False
+  - type: "true_false"
+    question: "Python is dynamically typed."
+    answer: true
+    hint: "How do you declare variable types in Python?"
+
+  # Short answer (exact or loose match handled by runtime)
+  - type: "short_answer"
+    question: "Name one Python web framework."
+    answer: "Django"
+    hint: "Starts with D"
+
+  # Essay (no fixed answer)
+  - type: "essay"
+    question: "Explain immutability vs mutability with examples."
+    word_count:
+      min: 80
+      max: 250
+    hint: "Use lists and tuples as contrasting examples."
+    keyword : ["key-value", "tuples are immutabe"]
+
+
+
+  # Coding task
+  - type: "coding"
+    language: "python"
+    question: "Write a function that returns the square of a number."
+    starter_code: |
+      def square(x):
+          # your code
+          pass
+    tests:
+      - input: "2"
+        expected_output: "4"
+      - input: "5"
+        expected_output: "25"
+    hint: "Use multiplication or exponentiation."

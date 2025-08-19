@@ -1,0 +1,31 @@
+title: "Final Exam"
+instructions: "Complete all questions. No external help."
+
+settings:
+  passing_score: 60
+  randomize_questions: false
+  attempts_allowed: 1
+  weight: 2
+
+questions:
+  - type: "multiple_choice"
+    question: "Which term describes a running program instance?"
+    options: ["Process", "Thread", "File", "Socket"]
+    answer: "Process"
+
+  - type: "essay"
+    question: "Contrast processes and threads in terms of isolation and overhead."
+    word_count: { min: 150, max: 400 }
+    hint: "Think address space and context switching."
+
+  - type: "coding"
+    language: "python"
+    question: "Implement factorial using recursion."
+    tests:
+      - input: "5"
+        expected_output: "120"
+    hint: "Base case for 0 or 1."
+
+  - type: "short_answer"
+    question: "Name one CPU scheduling algorithm."
+    answer: "Round Robin"

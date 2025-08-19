@@ -1,0 +1,20 @@
+title: "Supplementary Materials"
+description: "Optional resources for deeper learning"
+
+materials:
+  - type: "file"
+    title: "Lecture Notes"
+    path: "notes/week1.pdf"
+
+  - type: "link"
+    title: "Official Docs"
+    url: "https://docs.python.org/3/"
+
+  - type: "video"
+    title: "Explainer"
+    url: "https://example.com/explainer.mp4"
+
+  - type: "dataset"
+    title: "Sample Data"
+    path: "data/sample.csv"
+    description: "Used in chapter exercises."
