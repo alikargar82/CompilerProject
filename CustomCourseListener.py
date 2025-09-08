@@ -5,13 +5,15 @@ from required_code_collection.make_ast_subtree import make_ast_subtree
 
 class CustomCourseListener(CourseListener):
 	def __init__(self):
-		self.overridden_rules = ['ref','type','course_intro'] #change
+		self.overridden_rules = ['ref','type','course_intro','courseIntro'] #change
 		self.binary_operator_list = [] #change
 		self.compound_rules = [] #change
 		self.scoped_rules = [] #change
 		self.rule_names = []
 		self.ast = AST()
 
+	def exitCourseIntro(self, ctx: CourseParser.CourseIntroContext):
+		make_ast_subtree(self.ast, ctx, "course_intro", keep_node=True)
 
 	def exitEveryRule(self, ctx):
 		rule_name = self.rule_names[ctx.getRuleIndex()]
