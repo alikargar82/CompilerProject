@@ -1,22 +1,16 @@
 {
   "type": "chapter",
-  "title": "Chapter 2: Functions",
-  "descripyion":"why functional",
-"objectives": [
-    "Students can create simple classes with methods and attributes"
+  "title": "Chapter 2: Dariush",
+  "description":"why Dariush was great",
+  "objectives": [
+    "Understand the Dariush's contributions"
   ],
   "content": [
     {
       "type": "text",
-      "title": "What is a Function?",
-      "body": "A function is a reusable block of code."
-    },
-    {
-      "type": "example",
-      "language": "python",
-      "code": "def greet():\n    print('Hello')\n\ngreet()",
-      "explanation": "This defines and calls a simple function."
+      "title": "What did Dariush do?",
+      "body": "Dariush was known for his administrative genius and for expanding the Persian Empire."
     }
   ],
-  "summary": "Functions help organize code into reusable blocks."
+  "summary": "Dariush's contributions were pivotal in shaping the Persian Empire."
 }

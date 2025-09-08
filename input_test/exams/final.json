@@ -10,18 +10,18 @@
   "questions": [
     {
       "type": "multiple_choice",
-      "question": "What is OOP?",
-      "options": ["Object-Oriented Programming", "Other Object Protocol"],
-      "answer": "Object-Oriented Programming"
+      "question": "What was the most significant achievement of Cyrus the Great?",
+      "options": ["Founding the Achaemenid Empire", "Other Object Protocol"],
+      "answer": "Founding the Achaemenid Empire"
     },
     {
       "type": "essay",
-      "question": "Explain functions in one paragraph.",
+      "question": "Explain the significance of Dariush's contributions.",
       "word_count": {
         "min": 200,
         "max": 500
       },
-      "hint": "similar to mathematical function"
+      "hint": "Focus on administrative and military reforms."
     }
   ]
 }

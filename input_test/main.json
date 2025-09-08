@@ -1,10 +1,10 @@
 {
   "course_introduction":
     {
-    "name": "Intro to Python",
-    "author": "Dr. Sarah Chen",
-    "description": "A simple Python course.",
-    "level": "beginner"
+    "name": "History Course",
+    "author": "Arzhang Amirfazli",
+    "description": "A sophisticated history course.",
+    "level": "Super Advanced"
    },
   "flow": [
     {

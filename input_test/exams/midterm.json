@@ -10,22 +10,10 @@
   "questions": [
     {
       "type": "multiple_choice",
-      "question": "What is a list?",
-      "options": ["A data type", "A function", "A variable"],
-      "answer": "A data type",
-      "explanation": "data in the list"
-    },
-    {
-      "type": "coding",
-      "language": "python",
-      "question": "Write a function to add two numbers.",
-      "tests": [
-        {
-          "input": "add(2, 3)",
-          "expected_output": "5"
-        }
-      ],
-      "hint": "use plus symbol"
+      "question": "Who was Cyrus the Great?",
+      "options": ["The founder of the Achaemenid Empire", "A function", "A variable"],
+      "answer": "The founder of the Achaemenid Empire",
+      "explanation": "Cyrus the Great was the founder of the Achaemenid Empire."
     }
   ]
 }

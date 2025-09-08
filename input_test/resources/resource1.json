@@ -3,14 +3,14 @@
   "materials": [
     {
       "type": "link",
-      "title": "Python Docs",
-      "url": "https://docs.python.org"
+      "title": "Cyrus Docs",
+      "url": "https://docs.cyrus.com"
     },
     {
       "type": "file",
       "title": "Cheat Sheet",
       "path": "cheatsheet.pdf",
-      "description": "A handy reference for Python syntax"
+      "description": "A handy reference for Cyrus syntax"
     }
   ]
 }

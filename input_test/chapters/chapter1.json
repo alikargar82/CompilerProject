@@ -1,22 +1,26 @@
 {
   "type": "chapter",
-  "title": "Chapter 1: Basics",
-  "description": "Data types, Goal, ...",
+  "title": "Chapter 1: Hakhamaneshi",
+  "description": "Korosh the Great",
   "objectives": [
-    "Students can work with lists, dictionaries, and tuples"
+    "Study the Achaemenid Empire"
   ],
   "content": [
     {
       "type": "text",
-      "title": "Variables",
-      "body": "Variables store data."
+      "title": "Cyrus the Great",
+      "body": "Cyrus the Great was the founder of the Achaemenid Empire."
     },
     {
-      "type": "example",
-      "language": "python",
-      "code": "x = 5\nprint(x)",
-      "explanation": "This creates a variable and prints it."
+      "type": "image",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Cyrus_the_Great_from_Behistun_Relief.jpg",
+      "caption": "Cyrus the Great"
+    },
+    {
+      "type": "video",
+      "url": "https://www.youtube.com/watch?v=U6nPMW7H4fI",
+      "caption": "Documentary on Cyrus the Great"
     }
   ],
-  "summary": "Python Basics"
+  "summary": "Achaemenid Empire Overview"
 }
