@@ -17,110 +17,43 @@ class ContentAwareCourseCodeGenerator:
         """Extract all course content from AST traversal"""
         # Parse the linear AST traversal into structured data
         
-        # Extract metadata
-        for i, token in enumerate(ast_traversal):
-            if token == 'metadata_name' and i > 0:
-                self.course_data['metadata']['name'] = ast_traversal[i-1].strip('"')
-            elif token == 'metadata_author' and i > 0:
-                self.course_data['metadata']['author'] = ast_traversal[i-1].strip('"')
-            elif token == 'metadata_description' and i > 0:
-                self.course_data['metadata']['description'] = ast_traversal[i-1].strip('"')
-            elif token == 'metadata_level' and i > 0:
-                self.course_data['metadata']['level'] = ast_traversal[i-1].strip('"')
+        # Extract metadata from tokens like "metadata_name_\"Introduction to Python Programming\""
+        for token in ast_traversal:
+            if token.startswith('metadata_name_'):
+                self.course_data['metadata']['name'] = token.replace('metadata_name_', '').strip('"')
+            elif token.startswith('metadata_author_'):
+                self.course_data['metadata']['author'] = token.replace('metadata_author_', '').strip('"')
+            elif token.startswith('metadata_description_'):
+                self.course_data['metadata']['description'] = token.replace('metadata_description_', '').strip('"')
+            elif token.startswith('metadata_level_'):
+                self.course_data['metadata']['level'] = token.replace('metadata_level_', '').strip('"')
+            elif token.startswith('metadata_tags_'):
+                # Tags are handled as arrays, so we'll collect them separately
+                pass
         
-        # Extract structured content by tracking sections
-        current_section = None
-        current_item = {}
-        i = 0
-        
-        while i < len(ast_traversal):
-            token = ast_traversal[i]
-            
-            # Detect section types
-            if token == 'flow_type' and i > 0:
-                section_type = ast_traversal[i-1].strip('"')
-                if section_type in ['chapter', 'quiz', 'exam', 'resource']:
-                    if current_section and current_item:
-                        self.finalize_section(current_section, current_item)
-                    current_section = section_type
-                    current_item = {'type': section_type}
-            # Fallback: some listeners may emit just 'type'
-            elif token == 'type' and i > 0:
-                section_type = ast_traversal[i-1].strip('"')
-                if section_type in ['chapter', 'quiz', 'exam', 'resource']:
-                    if current_section and current_item:
-                        self.finalize_section(current_section, current_item)
-                    current_section = section_type
-                    current_item = {'type': section_type}
-            
-            # Extract content based on current section
-            elif current_section:
-                if token == 'content_title' and i > 0:
-                    current_item['title'] = ast_traversal[i-1].strip('"')
-                elif token == 'instructions' and i > 0:
-                    current_item['instructions'] = ast_traversal[i-1].strip('"')
-                elif token == 'metadata_description' and i > 0:
-                    current_item['description'] = ast_traversal[i-1].strip('"')
-                elif token == 'setting_passing_score' and i > 0:
-                    if 'settings' not in current_item:
-                        current_item['settings'] = {}
-                    current_item['settings']['passing_score'] = int(ast_traversal[i-1])
-                elif token == 'setting_time_limit' and i > 0:
-                    if 'settings' not in current_item:
-                        current_item['settings'] = {}
-                    current_item['settings']['time_limit'] = ast_traversal[i-1].strip('"')
-                elif token == 'question_question' and i > 0:
-                    if 'questions' not in current_item:
-                        current_item['questions'] = []
-                    # Extract complete question
-                    question = self.extract_question_from_position(ast_traversal, i)
-                    if question:
-                        current_item['questions'].append(question)
-                elif token == 'content_body' and i > 0:
-                    if 'content' not in current_item:
-                        current_item['content'] = []
-                    current_item['content'].append({
-                        'type': 'text',
-                        'title': current_item.get('current_title', 'Content'),
-                        'body': ast_traversal[i-1].strip('"')
-                    })
-                elif token == 'content_code' and i > 0:
-                    if 'content' not in current_item:
-                        current_item['content'] = []
-                    current_item['content'].append({
-                        'type': 'example',
-                        'title': current_item.get('current_title', 'Example'),
-                        'code': ast_traversal[i-1].strip('"').replace('\\\\n', '\\n'),
-                        'language': 'python'
-                    })
-                elif token == 'content_url' and i > 0:
-                    if 'content' not in current_item:
-                        current_item['content'] = []
-                    current_item['content'].append({
-                        'type': 'video',
-                        'title': current_item.get('current_title', 'Video'),
-                        'url': ast_traversal[i-1].strip('"')
-                    })
-                elif token == 'material_path' and i > 0:
-                    if 'materials' not in current_item:
-                        current_item['materials'] = []
-                    current_item['materials'].append({
-                        'type': 'file',
-                        'title': current_item.get('current_title', 'File'),
-                        'path': ast_traversal[i-1].strip('"')
-                    })
-                elif token == 'summary' and i > 0:
-                    current_item['summary'] = ast_traversal[i-1].strip('"')
-                    
-                # Track current title for content items
-                if token == 'content_title' and i > 0:
-                    current_item['current_title'] = ast_traversal[i-1].strip('"')
-            
-            i += 1
-        
-        # Finalize last section
-        if current_section and current_item:
-            self.finalize_section(current_section, current_item)
+        # Extract flow items and their references
+        current_flow_item = None
+        for token in ast_traversal:
+            if token.startswith('flow_type_'):
+                # Extract type like "flow_type_\"chapter\""
+                type_value = token.replace('flow_type_', '').strip('"')
+                if type_value in ['chapter', 'quiz', 'exam', 'resource']:
+                    current_flow_item = {'type': type_value}
+            elif token.startswith('ref_'):
+                # Extract reference like "ref_\"chapters/chapter1.json\""
+                ref_path = token.replace('ref_', '').strip('"')
+                if current_flow_item:
+                    current_flow_item['ref'] = ref_path
+                    # Add to appropriate collection based on type
+                    if current_flow_item['type'] == 'chapter':
+                        self.course_data['chapters'].append({'ref': ref_path})
+                    elif current_flow_item['type'] == 'quiz':
+                        self.course_data['quizzes'].append({'ref': ref_path})
+                    elif current_flow_item['type'] == 'exam':
+                        self.course_data['exams'].append({'ref': ref_path})
+                    elif current_flow_item['type'] == 'resource':
+                        self.course_data['resources'].append({'ref': ref_path})
+                    current_flow_item = None
         
         return self.course_data
     
@@ -317,6 +250,8 @@ class ContentAwareCourseCodeGenerator:
         
         course_name = course_data['metadata'].get('name', 'Course')
         author = course_data['metadata'].get('author', 'Instructor')
+        description = course_data['metadata'].get('description', 'A comprehensive course')
+        level = course_data['metadata'].get('level', 'beginner')
         
         # Generate runtime loader that reads main.json and referenced flow files
         code = f'''from mcp.server.fastmcp import FastMCP
@@ -371,8 +306,8 @@ def load_course_from_files(main_json_path: str) -> Dict[str, Any]:
     course['metadata'] = {{
         'name': meta.get('name', "{course_name}"),
         'author': meta.get('author', "{author}"),
-        'description': meta.get('description', ''),
-        'level': meta.get('level', ''),
+        'description': meta.get('description', "{description}"),
+        'level': meta.get('level', "{level}"),
         'tags': meta.get('tags', [])
     }}
 
