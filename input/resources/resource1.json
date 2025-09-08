@@ -15,18 +15,6 @@
       "description": "The most comprehensive and up-to-date Python documentation"
     },
     {
-      "type": "video",
-      "title": "Python Best Practices",
-      "url": "https://python-course.com/videos/best-practices.mp4",
-      "description": "Learn industry-standard coding practices and conventions"
-    },
-    {
-      "type": "dataset",
-      "title": "Practice Datasets",
-      "path": "data/sample-datasets.zip",
-      "description": "CSV files with real-world data for practicing data manipulation"
-    },
-    {
       "type": "link",
       "title": "Python Package Index (PyPI)",
       "url": "https://pypi.org/",

@@ -11,7 +11,12 @@
     {
       "type": "multiple_choice",
       "question": "What will be the output of: print([1, 2, 3] + [4, 5])?",
-      "options": ["[1, 2, 3, 4, 5]", "[5, 7, 8]", "Error", "[1, 2, 3] + [4, 5]"],
+      "options": [
+        "[1, 2, 3, 4, 5]",
+        "[5, 7, 8]",
+        "Error",
+        "[1, 2, 3] + [4, 5]"
+      ],
       "answer": "[1, 2, 3, 4, 5]",
       "explanation": "The + operator concatenates lists in Python."
     },
@@ -47,7 +52,7 @@
       "question": "In object-oriented programming, what does encapsulation refer to?",
       "options": [
         "Hiding internal implementation details",
-        "Creating multiple objects from a class", 
+        "Creating multiple objects from a class",
         "Inheriting from parent classes",
         "Overriding methods in subclasses"
       ],
@@ -65,12 +70,6 @@
         }
       ],
       "hint": "Use split() to separate words and a dictionary to count occurrences"
-    },
-    {
-      "type": "short_answer",
-      "question": "What is the purpose of the '__init__' method in a Python class?",
-      "answer": "constructor",
-      "explanation": "The __init__ method is the constructor that initializes new objects when they are created."
     }
   ]
 }

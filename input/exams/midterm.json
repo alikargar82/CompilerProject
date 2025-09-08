@@ -16,16 +16,6 @@
       "explanation": "The list has 3 elements: 1, 2, and [3, 4]. The nested list counts as one element."
     },
     {
-      "type": "essay",
-      "question": "Explain the difference between a function and a method in Python. Provide examples of each.",
-      "word_count": {
-        "min": 100,
-        "max": 300
-      },
-      "hint": "Think about where functions and methods are defined and how they are called",
-      "explanation": "Functions are standalone blocks of code, while methods are functions that belong to objects/classes."
-    },
-    {
       "type": "coding",
       "language": "python",
       "question": "Write a function called 'calculate_grade' that takes a list of scores and returns the average as a letter grade (A: 90+, B: 80-89, C: 70-79, D: 60-69, F: <60)",
@@ -35,7 +25,7 @@
           "expected_output": "A"
         },
         {
-          "input": "[78, 82, 85]", 
+          "input": "[78, 82, 85]",
           "expected_output": "B"
         },
         {
@@ -44,12 +34,6 @@
         }
       ],
       "hint": "Calculate the average first, then use conditional statements for grade assignment"
-    },
-    {
-      "type": "short_answer",
-      "question": "What keyword is used to define a class in Python?",
-      "answer": "class",
-      "explanation": "The 'class' keyword is used to define classes in Python."
     },
     {
       "type": "multiple_choice",
