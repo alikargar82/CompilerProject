@@ -5,10 +5,10 @@ from required_code_collection.make_ast_subtree import make_ast_subtree
 
 class CustomCourseListener(CourseListener):
 	def __init__(self):
-		self.overridden_rules = [  'tagList'] #change
+		self.overridden_rules = ['ref','type'] #change
 		self.binary_operator_list = [] #change
 		self.compound_rules = [] #change
-		self.scoped_rules = [ 'flowItem'] #change
+		self.scoped_rules = [] #change
 		self.rule_names = []
 		self.ast = AST()
 
