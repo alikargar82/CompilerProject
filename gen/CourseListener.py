@@ -17,84 +17,39 @@ class CourseListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by CourseParser#metadata.
-    def enterMetadata(self, ctx:CourseParser.MetadataContext):
+    # Enter a parse tree produced by CourseParser#object.
+    def enterObject(self, ctx:CourseParser.ObjectContext):
         pass
 
-    # Exit a parse tree produced by CourseParser#metadata.
-    def exitMetadata(self, ctx:CourseParser.MetadataContext):
-        pass
-
-
-    # Enter a parse tree produced by CourseParser#tagList.
-    def enterTagList(self, ctx:CourseParser.TagListContext):
-        pass
-
-    # Exit a parse tree produced by CourseParser#tagList.
-    def exitTagList(self, ctx:CourseParser.TagListContext):
+    # Exit a parse tree produced by CourseParser#object.
+    def exitObject(self, ctx:CourseParser.ObjectContext):
         pass
 
 
-    # Enter a parse tree produced by CourseParser#studentData.
-    def enterStudentData(self, ctx:CourseParser.StudentDataContext):
+    # Enter a parse tree produced by CourseParser#array.
+    def enterArray(self, ctx:CourseParser.ArrayContext):
         pass
 
-    # Exit a parse tree produced by CourseParser#studentData.
-    def exitStudentData(self, ctx:CourseParser.StudentDataContext):
-        pass
-
-
-    # Enter a parse tree produced by CourseParser#capacity.
-    def enterCapacity(self, ctx:CourseParser.CapacityContext):
-        pass
-
-    # Exit a parse tree produced by CourseParser#capacity.
-    def exitCapacity(self, ctx:CourseParser.CapacityContext):
+    # Exit a parse tree produced by CourseParser#array.
+    def exitArray(self, ctx:CourseParser.ArrayContext):
         pass
 
 
-    # Enter a parse tree produced by CourseParser#num.
-    def enterNum(self, ctx:CourseParser.NumContext):
+    # Enter a parse tree produced by CourseParser#pair.
+    def enterPair(self, ctx:CourseParser.PairContext):
         pass
 
-    # Exit a parse tree produced by CourseParser#num.
-    def exitNum(self, ctx:CourseParser.NumContext):
-        pass
-
-
-    # Enter a parse tree produced by CourseParser#flow.
-    def enterFlow(self, ctx:CourseParser.FlowContext):
-        pass
-
-    # Exit a parse tree produced by CourseParser#flow.
-    def exitFlow(self, ctx:CourseParser.FlowContext):
+    # Exit a parse tree produced by CourseParser#pair.
+    def exitPair(self, ctx:CourseParser.PairContext):
         pass
 
 
-    # Enter a parse tree produced by CourseParser#flowItem.
-    def enterFlowItem(self, ctx:CourseParser.FlowItemContext):
+    # Enter a parse tree produced by CourseParser#value.
+    def enterValue(self, ctx:CourseParser.ValueContext):
         pass
 
-    # Exit a parse tree produced by CourseParser#flowItem.
-    def exitFlowItem(self, ctx:CourseParser.FlowItemContext):
-        pass
-
-
-    # Enter a parse tree produced by CourseParser#address.
-    def enterAddress(self, ctx:CourseParser.AddressContext):
-        pass
-
-    # Exit a parse tree produced by CourseParser#address.
-    def exitAddress(self, ctx:CourseParser.AddressContext):
-        pass
-
-
-    # Enter a parse tree produced by CourseParser#mode_type.
-    def enterMode_type(self, ctx:CourseParser.Mode_typeContext):
-        pass
-
-    # Exit a parse tree produced by CourseParser#mode_type.
-    def exitMode_type(self, ctx:CourseParser.Mode_typeContext):
+    # Exit a parse tree produced by CourseParser#value.
+    def exitValue(self, ctx:CourseParser.ValueContext):
         pass
 
 
