@@ -1,0 +1,15 @@
+{
+  "title": "Final Exam",
+  "questions": [
+    {
+      "type": "multiple_choice",
+      "question": "What is OOP?",
+      "options": ["Object-Oriented Programming", "Other Object Protocol"],
+      "answer": "Object-Oriented Programming"
+    },
+    {
+      "type": "essay",
+      "question": "Explain functions in one paragraph."
+    }
+  ]
+}
