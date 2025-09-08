@@ -1,0 +1,17 @@
+{
+  "type": "chapter",
+  "title": "Chapter 2: Functions",
+  "content": [
+    {
+      "type": "text",
+      "title": "What is a Function?",
+      "body": "A function is a reusable block of code."
+    },
+    {
+      "type": "example",
+      "language": "python",
+      "code": "def greet():\n    print('Hello')\n\ngreet()",
+      "explanation": "This defines and calls a simple function."
+    }
+  ]
+}

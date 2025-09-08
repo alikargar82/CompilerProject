@@ -1,0 +1,19 @@
+{
+  "name": "Intro to Python",
+  "description": "A simple Python course.",
+  "flow": [
+    {
+      "type": "chapter",
+      "ref": "chapters/chapter1.json"
+    },
+    {
+      "type": "chapter",
+      "ref": "chapters/chapter2.json"
+    },
+    {
+      "type": "resource",
+      "ref": "resources/resource1.json",
+      "modes": ["file", "link"]
+    }
+  ]
+}

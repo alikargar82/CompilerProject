@@ -1,0 +1,15 @@
+{
+  "title": "Helpful Resources",
+  "materials": [
+    {
+      "type": "link",
+      "title": "Python Docs",
+      "url": "https://docs.python.org"
+    },
+    {
+      "type": "file",
+      "title": "Cheat Sheet",
+      "path": "cheatsheet.pdf"
+    }
+  ]
+}
