@@ -2,9 +2,56 @@ grammar Course;
 
 // ===== ROOT =====
 courseFile
-    : object EOF
+    :'{' courseIntroduction COMMA flow '}' EOF
     ;
 
+// ===== COURSE INTRODUCTION =====
+courseIntroduction
+    : '"course_introduction"' COLON courseIntro
+    ;
+
+
+courseIntro
+    : LBRACE
+        '"name"' COLON STRING COMMA
+        '"author"' COLON STRING COMMA
+        '"description"' COLON STRING COMMA
+        '"level"' COLON STRING COMMA
+        '"tags"' COLON array
+      RBRACE
+    ;
+
+// ===== FLOW =====
+flow
+    : '"flow"' COLON arrayOfFlowItems
+    ;
+
+arrayOfFlowItems
+    : LBRACKET flowItem (COMMA flowItem)* RBRACKET
+    ;
+
+flowItem
+    : LBRACE
+        type
+        ((ref?
+        modes)
+        |
+        (modes
+        ref)?)
+      RBRACE
+    ;
+
+type
+    :'"type"' COLON TYPES
+    ;
+
+ref
+    :COMMA '"ref"' COLON STRING
+    ;
+
+modes
+    :COMMA '"modes"' COLON array
+    ;
 // ===== JSON STRUCTURE =====
 object
     : LBRACE (pair (COMMA pair)*)? RBRACE
@@ -35,6 +82,14 @@ RBRACKET    : ']' ;
 COMMA       : ',' ;
 COLON       : ':' ;
 NULL        : 'null' ;
+
+TYPES
+    :'"registration"'
+    |'"chapter"'
+    |'"quiz"'
+    |'"exam"'
+    |'"resource"'
+    ;
 
 STRING
     : '"' (~["\\\r\n] | '\\' .)* '"'

@@ -1,10 +1,18 @@
 {
-  "name": "Introduction to Python Programming",
-  "author": "Dr. Sarah Chen",
-  "description": "A comprehensive course covering Python fundamentals, data structures, and object-oriented programming",
-  "level": "beginner",
-  "tags": ["python", "programming", "data-structures", "oop", "beginner-friendly"],
-
+  "course_introduction":
+    {
+      "name": "Introduction to Python Programming",
+      "author": "Dr. Sarah Chen",
+      "description": "A comprehensive course covering Python fundamentals, data structures, and object-oriented programming",
+      "level": "beginner",
+      "tags": [
+        "python",
+        "programming",
+        "data-structures",
+        "oop",
+        "beginner-friendly"
+      ]
+    },
   "flow": [
     {
       "type": "registration",

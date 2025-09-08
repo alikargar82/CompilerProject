@@ -6,183 +6,18 @@ from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
 from datetime import datetime
 
-mcp = FastMCP("Introduction to Python Programming")
+mcp = FastMCP("Course")
 
 # Database setup
 DB_PATH = "course_data.db"
 
 # Course content for database population (only used during initialization)
 _COURSE_CONTENT = {
-  "metadata": {
-    "name": "Introduction to Python Programming",
-    "author": "Dr. Sarah Chen",
-    "description": "Complete code examples from all course chapters",
-    "level": "beginner"
-  },
-  "chapters": [
-    {
-      "type": "chapter",
-      "title": "Python Data Types Hierarchy",
-      "current_title": "Python Data Types Hierarchy",
-      "description": "Deep dive into Python data types, conditional statements, and loops",
-      "content": [
-        {
-          "type": "text",
-          "title": "Python Data Types",
-          "body": "Python has several built-in data types: integers (int), floating-point numbers (float), strings (str), booleans (bool), lists, tuples, and dictionaries. Each type serves different purposes and has unique characteristics."
-        },
-        {
-          "type": "video",
-          "title": "Working with Lists and Dictionaries",
-          "url": "https://python-course.com/videos/data-structures.mp4"
-        },
-        {
-          "type": "example",
-          "title": "Working with Lists and Dictionaries",
-          "code": "# Lists - ordered and mutable\\nfruits = ['apple', 'banana', 'orange']\\nfruits.append('grape')\\nprint(fruits[0])  # apple\\n\\n# Dictionaries - key-value pairs\\nstudent = {\\n    'name': 'John',\\n    'age': 20,\\n    'major': 'Computer Science'\\n}\\nprint(student['name'])  # John\\n\\n# Conditional statements\\nif student['age'] >= 18:\\n    print('Adult')\\nelse:\\n    print('Minor')\\n\\n# Loops\\nfor fruit in fruits:\\n    print(f'I like {fruit}')",
-          "language": "python"
-        },
-        {
-          "type": "video",
-          "title": "Control Flow Explanation",
-          "url": "https://python-course.com/audio/control-flow.mp3"
-        }
-      ],
-      "summary": "end_scope_operator"
-    },
-    {
-      "type": "chapter",
-      "title": "Object-Oriented Programming Concepts",
-      "current_title": "Object-Oriented Programming Concepts",
-      "description": "Learn to write reusable code with functions and understand classes and objects",
-      "content": [
-        {
-          "type": "text",
-          "title": "Functions in Python",
-          "body": "Functions are reusable blocks of code that perform specific tasks. They help organize code, avoid repetition, and make programs more modular. Functions can accept parameters and return values."
-        },
-        {
-          "type": "video",
-          "title": "Creating Your First Functions",
-          "url": "https://python-course.com/videos/functions.mp4"
-        },
-        {
-          "type": "example",
-          "title": "Creating Your First Functions",
-          "code": "# Function definition\\ndef greet(name, age=18):\\n    '''Greet a person with their name and age'''\\n    return f'Hello {name}, you are {age} years old!'\\n\\n# Function calls\\nmessage1 = greet('Alice', 25)\\nmessage2 = greet('Bob')  # uses default age\\nprint(message1)\\nprint(message2)\\n\\n# Class definition\\nclass Student:\\n    def __init__(self, name, major):\\n        self.name = name\\n        self.major = major\\n        self.courses = []\\n    \\n    def enroll(self, course):\\n        self.courses.append(course)\\n        return f'{self.name} enrolled in {course}'\\n\\n# Creating objects\\nstudent1 = Student('John', 'Computer Science')\\nresult = student1.enroll('Python Programming')\\nprint(result)",
-          "language": "python"
-        },
-        {
-          "type": "video",
-          "title": "Object-Oriented Programming Concepts",
-          "url": "https://python-course.com/audio/oop-concepts.mp3"
-        }
-      ],
-      "summary": "end_scope_operator"
-    }
-  ],
-  "quizzes": [
-    {
-      "type": "quiz",
-      "title": "Python Fundamentals Quiz",
-      "current_title": "Python Fundamentals Quiz",
-      "instructions": "Test your understanding of Python basics. Each question is worth equal points.",
-      "settings": {
-        "passing_score": 80,
-        "time_limit": "15m"
-      },
-      "questions": [
-        {
-          "question": "Python is a case-sensitive language",
-          "answer": True,
-          "hint": "Think about variable names like 'Name' vs 'name'",
-          "explanation": "Python is case-sensitive, meaning 'Name' and 'name' are treated as different variables."
-        },
-        {
-          "question": "What built-in function would you use to find the length of a list?",
-          "answer": "len()",
-          "hint": "It's a three-letter function",
-          "explanation": "The len() function returns the number of items in a sequence or collection."
-        }
-      ]
-    }
-  ],
-  "exams": [
-    {
-      "type": "exam",
-      "title": "Python Midterm Examination",
-      "current_title": "Python Midterm Examination",
-      "instructions": "This exam covers chapters 1-2. You have 90 minutes to complete all questions. Show your work for coding problems.",
-      "settings": {
-        "passing_score": 75
-      },
-      "questions": [
-        {
-          "question": "What keyword is used to define a class in Python?",
-          "answer": "class",
-          "explanation": "The 'class' keyword is used to define classes in Python."
-        }
-      ]
-    },
-    {
-      "type": "exam",
-      "title": "Python Programming Final Exam",
-      "current_title": "Python Programming Final Exam",
-      "instructions": "Comprehensive final examination covering all course material. Read each question carefully and show your work.",
-      "settings": {
-        "passing_score": 70
-      },
-      "questions": [
-        {
-          "question": "What is the purpose of the '__init__' method in a Python class?",
-          "answer": "constructor",
-          "explanation": "The __init__ method is the constructor that initializes new objects when they are created."
-        }
-      ]
-    }
-  ],
-  "resources": [
-    {
-      "type": "resource",
-      "title": "Code Examples Repository",
-      "current_title": "Code Examples Repository",
-      "description": "Complete code examples from all course chapters",
-      "materials": [
-        {
-          "type": "file",
-          "title": "Python Quick Reference Guide",
-          "path": "resources/python-quick-ref.pdf"
-        },
-        {
-          "type": "file",
-          "title": "Practice Datasets",
-          "path": "data/sample-datasets.zip"
-        },
-        {
-          "type": "file",
-          "title": "Code Examples Repository",
-          "path": "resources/code-examples.zip"
-        }
-      ],
-      "content": [
-        {
-          "type": "video",
-          "title": "Official Python Documentation",
-          "url": "https://docs.python.org/3/"
-        },
-        {
-          "type": "video",
-          "title": "Python Best Practices",
-          "url": "https://python-course.com/videos/best-practices.mp4"
-        },
-        {
-          "type": "video",
-          "title": "Python Package Index (PyPI)",
-          "url": "https://pypi.org/"
-        }
-      ]
-    }
-  ],
+  "metadata": {},
+  "chapters": [],
+  "quizzes": [],
+  "exams": [],
+  "resources": [],
   "student_data": {}
 }
 
@@ -477,7 +312,7 @@ init_database()
 
 @mcp.tool()
 def register_student(name: str, student_id: str) -> str:
-    """Register a student for Introduction to Python Programming"""
+    """Register a student for Course"""
     # Ensure database is initialized
     init_database()
     
@@ -489,7 +324,7 @@ def register_student(name: str, student_id: str) -> str:
     
     if existing:
         conn.close()
-        return f"Welcome back, {name}! You're already registered for Introduction to Python Programming."
+        return f"Welcome back, {name}! You're already registered for Course."
     else:
         cursor.execute("""
             INSERT INTO students (student_id, name, last_activity)
@@ -497,7 +332,7 @@ def register_student(name: str, student_id: str) -> str:
         """, (student_id, name, datetime.now().isoformat()))
         conn.commit()
         conn.close()
-        return f"Welcome to Introduction to Python Programming, {name}! Registration successful."
+        return f"Welcome to Course, {name}! Registration successful."
 
 @mcp.tool()
 def get_course_info() -> str:
@@ -506,8 +341,8 @@ def get_course_info() -> str:
     cursor = conn.cursor()
     
     # Get course metadata (hardcoded since it's in the code, not database)
-    course_name = "Introduction to Python Programming"
-    author = "Dr. Sarah Chen"
+    course_name = "Course"
+    author = "Instructor"
     description = "A comprehensive course covering Python fundamentals, data structures, and object-oriented programming"
     level = "beginner"
     
@@ -961,7 +796,7 @@ def get_student_progress(student_id: str) -> str:
     total_chapters = cursor.fetchone()[0]
     
     report = f"**Progress Report for {name}**\n\n"
-    report += f"**Course:** Introduction to Python Programming\n"
+    report += f"**Course:** Course\n"
     report += f"**Enrolled:** {created_at}\n"
     report += f"**Last Activity:** {last_activity}\n\n"
     
