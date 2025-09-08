@@ -1,6 +1,10 @@
 {
   "type": "chapter",
   "title": "Chapter 2: Functions",
+  "descripyion":"why functional",
+"objectives": [
+    "Students can create simple classes with methods and attributes"
+  ],
   "content": [
     {
       "type": "text",
@@ -13,5 +17,6 @@
       "code": "def greet():\n    print('Hello')\n\ngreet()",
       "explanation": "This defines and calls a simple function."
     }
-  ]
+  ],
+  "summary": "Functions help organize code into reusable blocks."
 }

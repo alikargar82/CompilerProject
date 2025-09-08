@@ -9,7 +9,8 @@
     {
       "type": "file",
       "title": "Cheat Sheet",
-      "path": "cheatsheet.pdf"
+      "path": "cheatsheet.pdf",
+      "description": "A handy reference for Python syntax"
     }
   ]
 }
