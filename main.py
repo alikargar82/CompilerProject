@@ -1,7 +1,7 @@
 from antlr4 import *
 import argparse
 from CustomCourseListener import CustomCourseListener
-from content_aware_generator import ContentAwareCourseCodeGenerator
+from code_generator import ContentAwareCourseCodeGenerator
 from gen.CourseLexer import CourseLexer
 from gen.CourseParser import CourseParser
 from required_code_collection.ast_to_networkx_graph import show_ast
