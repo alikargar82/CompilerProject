@@ -12,7 +12,7 @@ mcp = FastMCP("Introduction to Python Programming")
 DB_PATH = "course_data.db"
 
 # Default path to main course file (override with env var COURSE_MAIN_JSON)
-MAIN_JSON_PATH = os.environ.get("COURSE_MAIN_JSON", os.path.join("input", "main.json"))
+MAIN_JSON_PATH = os.environ.get("COURSE_MAIN_JSON", "D:\\UNI_4032\\CD\\FinalProject\\sidshit\\CompilerProject\\input\\main.json")
 
 def _safe_read_json(file_path: str) -> Optional[Dict[str, Any]]:
     try:

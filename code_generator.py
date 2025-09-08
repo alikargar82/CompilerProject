@@ -1,7 +1,9 @@
 class ContentAwareCourseCodeGenerator:
-    def __init__(self):
+    def __init__(self, input_file_path=None):
         import json
+        import os
         self.json = json
+        self.input_file_path = input_file_path
         self.course_data = {
             'metadata': {},
             'chapters': [],
@@ -253,6 +255,16 @@ class ContentAwareCourseCodeGenerator:
         description = course_data['metadata'].get('description', 'A comprehensive course')
         level = course_data['metadata'].get('level', 'beginner')
         
+        # Determine the absolute path for the main JSON file
+        if self.input_file_path:
+            import os
+            abs_input_path = os.path.abspath(self.input_file_path)
+            # Escape backslashes for Windows paths
+            escaped_path = abs_input_path.replace('\\', '\\\\')
+            main_json_path = f'"{escaped_path}"'
+        else:
+            main_json_path = 'os.path.join("input", "main.json")'
+        
         # Generate runtime loader that reads main.json and referenced flow files
         code = f'''from mcp.server.fastmcp import FastMCP
 import json
@@ -268,7 +280,7 @@ mcp = FastMCP("{course_name}")
 DB_PATH = "course_data.db"
 
 # Default path to main course file (override with env var COURSE_MAIN_JSON)
-MAIN_JSON_PATH = os.environ.get("COURSE_MAIN_JSON", os.path.join("input", "main.json"))
+MAIN_JSON_PATH = os.environ.get("COURSE_MAIN_JSON", {main_json_path})
 
 def _safe_read_json(file_path: str) -> Optional[Dict[str, Any]]:
     try:

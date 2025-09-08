@@ -27,7 +27,7 @@ def main(arguments):
 	print(traversal)
 	
 	# Generate course-specific Python code with embedded content
-	code_gen = ContentAwareCourseCodeGenerator()
+	code_gen = ContentAwareCourseCodeGenerator(arguments.input)
 	final_code = code_gen.generate_from_ast(traversal)
 	print("\nGenerated Code:")
 	print(final_code[:1000] + "..." if len(final_code) > 1000 else final_code)
