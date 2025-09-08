@@ -1,19 +1,37 @@
 {
-  "name": "Intro to Python",
-  "description": "A simple Python course.",
+  "course_introduction":
+    {
+    "name": "Intro to Python",
+    "author": "Dr. Sarah Chen",
+    "description": "A simple Python course.",
+    "level": "beginner",
+      "tags": [
+        "python",
+        "oop"
+      ]    
+   },
   "flow": [
     {
       "type": "chapter",
       "ref": "chapters/chapter1.json"
     },
     {
-      "type": "chapter",
-      "ref": "chapters/chapter2.json"
+      "type": "quiz",
+      "ref": "quizzes/quiz1.json",
+      "modes": ["mcq"]
     },
     {
-      "type": "resource",
-      "ref": "resources/resource1.json",
-      "modes": ["file", "link"]
+      "type": "chapter",
+      "ref": "chapters/chapter2.json",
+      "modes": ["text", "video"]
+    },
+    {
+      "type": "exam",
+      "ref": "exams/midterm.json"
+    },
+    {
+      "type": "exam",
+      "ref": "exams/final.json"
     }
   ]
 }

@@ -1,5 +1,12 @@
 {
   "title": "Final Exam",
+  "instructions": "Covering all materials",
+  "settings": {
+    "passing_score": 70,
+    "randomize_questions": true,
+    "attempts_allowed": 1,
+    "weight": 3.0
+  },
   "questions": [
     {
       "type": "multiple_choice",
@@ -9,7 +16,12 @@
     },
     {
       "type": "essay",
-      "question": "Explain functions in one paragraph."
+      "question": "Explain functions in one paragraph.",
+      "word_count": {
+        "min": 200,
+        "max": 500
+      },
+      "hint": "similar to mathematical function"
     }
   ]
 }

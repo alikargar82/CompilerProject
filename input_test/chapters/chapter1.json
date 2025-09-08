@@ -1,6 +1,10 @@
 {
   "type": "chapter",
   "title": "Chapter 1: Basics",
+  "description": "Data types, Goal, ...",
+  "objectives": [
+    "Students can work with lists, dictionaries, and tuples"
+  ],
   "content": [
     {
       "type": "text",
@@ -13,5 +17,6 @@
       "code": "x = 5\nprint(x)",
       "explanation": "This creates a variable and prints it."
     }
-  ]
+  ],
+  "summary": "Python Basics"
 }

@@ -1,11 +1,19 @@
 {
   "title": "Midterm Exam",
+  "instructions": "90 minutes",
+  "settings": {
+    "passing_score": 75,
+    "randomize_questions": false,
+    "attempts_allowed": 1,
+    "weight": 2.0
+  },
   "questions": [
     {
       "type": "multiple_choice",
       "question": "What is a list?",
       "options": ["A data type", "A function", "A variable"],
-      "answer": "A data type"
+      "answer": "A data type",
+      "explanation": "data in the list"
     },
     {
       "type": "coding",
@@ -16,7 +24,8 @@
           "input": "add(2, 3)",
           "expected_output": "5"
         }
-      ]
+      ],
+      "hint": "use plus symbol"
     }
   ]
 }
