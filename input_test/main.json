@@ -1,15 +1,20 @@
 {
   "course_introduction":
     {
-    "name": "History Course",
-    "author": "Arzhang Amirfazli",
-    "description": "A sophisticated history course.",
-    "level": "Super Advanced"
-   },
+      "name": "History Course",
+      "author": "Arzhang Amirfazli",
+      "description": "A sophisticated history course.",
+      "level": "Super Advanced"S
+    },
   "flow": [
     {
+      "type": "registration",
+      "modes": ["form"]
+    },
+    {
       "type": "chapter",
-      "ref": "chapters/chapter1.json"
+      "ref": "chapters/chapter1.json",
+      "modes": ["text","video"]
     },
     {
       "type": "quiz",
@@ -30,7 +35,6 @@
       "type": "exam",
       "ref": "exams/final.json",
       "modes": ["mcq", "essay"]
-
     }
   ]
 }
