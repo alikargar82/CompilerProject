@@ -5,9 +5,9 @@ from code_generator import ContentAwareCourseCodeGenerator
 from gen.CourseLexer import CourseLexer
 from gen.CourseParser import CourseParser
 from required_code_collection.ast_to_networkx_graph import show_ast
+import os
 
 def main(arguments):
-	import os
 	stream = FileStream(arguments.input, encoding='utf8')
 	lexer = CourseLexer(stream)
 	token_stream = CommonTokenStream(lexer)
@@ -15,8 +15,7 @@ def main(arguments):
 	parse_tree = parser.courseFile()
 	
 	# Get the directory of the input file to resolve relative references
-	base_path = os.path.dirname(os.path.abspath(arguments.input))
-	ast_builder_listener = CustomCourseListener(base_path)
+	ast_builder_listener = CustomCourseListener()
 	
 	ast_builder_listener.rule_names = parser.ruleNames
 	walker = ParseTreeWalker()
