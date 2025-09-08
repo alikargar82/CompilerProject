@@ -44,6 +44,14 @@ class ContentAwareCourseCodeGenerator:
                         self.finalize_section(current_section, current_item)
                     current_section = section_type
                     current_item = {'type': section_type}
+            # Fallback: some listeners may emit just 'type'
+            elif token == 'type' and i > 0:
+                section_type = ast_traversal[i-1].strip('"')
+                if section_type in ['chapter', 'quiz', 'exam', 'resource']:
+                    if current_section and current_item:
+                        self.finalize_section(current_section, current_item)
+                    current_section = section_type
+                    current_item = {'type': section_type}
             
             # Extract content based on current section
             elif current_section:
@@ -310,12 +318,7 @@ class ContentAwareCourseCodeGenerator:
         course_name = course_data['metadata'].get('name', 'Course')
         author = course_data['metadata'].get('author', 'Instructor')
         
-        # Generate course data for database population
-        course_json = self.json.dumps(course_data, indent=2)
-        # Replace JSON booleans with Python booleans
-        course_json = course_json.replace(': true', ': True').replace(': false', ': False')
-        course_json = course_json.replace('true,', 'True,').replace('false,', 'False,')
-        
+        # Generate runtime loader that reads main.json and referenced flow files
         code = f'''from mcp.server.fastmcp import FastMCP
 import json
 import sqlite3
@@ -329,10 +332,76 @@ mcp = FastMCP("{course_name}")
 # Database setup
 DB_PATH = "course_data.db"
 
-# Course content for database population (only used during initialization)
-_COURSE_CONTENT = {course_json}
+# Default path to main course file (override with env var COURSE_MAIN_JSON)
+MAIN_JSON_PATH = os.environ.get("COURSE_MAIN_JSON", os.path.join("input", "main.json"))
+
+def _safe_read_json(file_path: str) -> Optional[Dict[str, Any]]:
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return None
+    except json.JSONDecodeError:
+        return None
+
+def _normalize_path(base_dir: str, ref_path: str) -> str:
+    # Resolve refs like "chapters/chapter1.json" relative to base_dir
+    norm = os.path.normpath(os.path.join(base_dir, ref_path))
+    return norm
+
+def load_course_from_files(main_json_path: str) -> Dict[str, Any]:
+    """Load course metadata and flow items from main.json and referenced files."""
+    course: Dict[str, Any] = {{
+        'metadata': {{}},
+        'chapters': [],
+        'quizzes': [],
+        'exams': [],
+        'resources': []
+    }}
+
+    main_abs = os.path.abspath(main_json_path)
+    base_dir = os.path.dirname(main_abs)
+
+    main_data = _safe_read_json(main_abs)
+    if not main_data:
+        return course
+
+    # Metadata
+    meta = main_data.get('course_introduction') or {{}}
+    course['metadata'] = {{
+        'name': meta.get('name', "{course_name}"),
+        'author': meta.get('author', "{author}"),
+        'description': meta.get('description', ''),
+        'level': meta.get('level', ''),
+        'tags': meta.get('tags', [])
+    }}
+
+    # Flow items
+    for item in main_data.get('flow', []):
+        item_type = (item or {{}}).get('type')
+        ref = (item or {{}}).get('ref')
+        if not item_type:
+            continue
+        if ref:
+            ref_path = _normalize_path(base_dir, ref)
+            ref_data = _safe_read_json(ref_path)
+        else:
+            ref_data = None
+
+        if item_type == 'chapter' and ref_data:
+            course['chapters'].append(ref_data)
+        elif item_type == 'quiz' and ref_data:
+            course['quizzes'].append(ref_data)
+        elif item_type == 'exam' and ref_data:
+            course['exams'].append(ref_data)
+        elif item_type == 'resource' and ref_data:
+            course['resources'].append(ref_data)
+        # registration or unreferenced items are ignored for content purposes
+
+    return course
 
 # Database initialization
+
 def init_database():
     """Initialize the course database with proper relational structure and course content"""
     conn = sqlite3.connect(DB_PATH)
@@ -509,14 +578,15 @@ def init_database():
     
     conn.commit()
     
-    # Populate course content from _COURSE_CONTENT
-    populate_course_content(cursor, conn)
+    # Load and populate course content from files
+    course = load_course_from_files(MAIN_JSON_PATH)
+    populate_course_content(cursor, conn, course)
     
     conn.close()
 
-def populate_course_content(cursor, conn):
-    """Populate database with course content from _COURSE_CONTENT"""
-    course = _COURSE_CONTENT
+
+def populate_course_content(cursor, conn, course: Dict[str, Any]):
+    """Populate database with course content from loaded course dict"""
     
     # Insert chapters
     for i, chapter in enumerate(course.get('chapters', []), 1):
@@ -544,10 +614,10 @@ def populate_course_content(cursor, conn):
             i,
             quiz.get('title', f'Quiz {{i}}'),
             quiz.get('instructions', ''),
-            quiz.get('settings', {{}}).get('passing_score', 70),
-            quiz.get('settings', {{}}).get('time_limit', ''),
-            quiz.get('settings', {{}}).get('attempts_allowed', 1),
-            quiz.get('settings', {{}}).get('randomize_questions', False)
+            (quiz.get('settings', {{}}) or {{}}).get('passing_score', 70),
+            (quiz.get('settings', {{}}) or {{}}).get('time_limit', ''),
+            (quiz.get('settings', {{}}) or {{}}).get('attempts_allowed', 1),
+            (quiz.get('settings', {{}}) or {{}}).get('randomize_questions', False)
         ))
         
         quiz_id = cursor.lastrowid
@@ -580,9 +650,9 @@ def populate_course_content(cursor, conn):
             exam.get('name', exam.get('title', 'Exam')),
             exam.get('title', 'Exam'),
             exam.get('instructions', ''),
-            exam.get('settings', {{}}).get('passing_score', 70),
-            exam.get('settings', {{}}).get('attempts_allowed', 1),
-            exam.get('settings', {{}}).get('weight', 1.0)
+            (exam.get('settings', {{}}) or {{}}).get('passing_score', 70),
+            (exam.get('settings', {{}}) or {{}}).get('attempts_allowed', 1),
+            (exam.get('settings', {{}}) or {{}}).get('weight', 1.0)
         ))
         
         exam_id = cursor.lastrowid
@@ -651,43 +721,45 @@ def get_course_info() -> str:
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
-    # Get course metadata (hardcoded since it's in the code, not database)
-    course_name = "{course_name}"
-    author = "{author}"
-    description = "A comprehensive course covering Python fundamentals, data structures, and object-oriented programming"
-    level = "beginner"
+    # Get course metadata (loaded from main.json when initializing)
+    md = load_course_from_files(MAIN_JSON_PATH).get('metadata', {{}})
+    course_name_local = md.get('name', "{course_name}")
+    author_local = md.get('author', "{author}")
+    description = md.get('description', '') or "A comprehensive course"
+    level = md.get('level', '') or "beginner"
     
-    info = f"Course: {{course_name}}\\n"
-    info += f"Instructor: {{author}}\\n"
-    info += f"Description: {{description}}\\n"
-    info += f"Level: {{level}}\\n\\n"
+    info = f"Course: {{course_name_local}}\n"
+    info += f"Instructor: {{author_local}}\n"
+    info += f"Description: {{description}}\n"
+    info += f"Level: {{level}}\n\n"
     
     # Get chapters from database
     cursor.execute("SELECT chapter_number, title FROM chapters ORDER BY chapter_number")
     chapters = cursor.fetchall()
     
-    info += "Course Structure:\\n"
+    info += "Course Structure:\n"
     for chapter_num, title in chapters:
-        info += f"{{chapter_num}}. {{title}}\\n"
+        info += f"{{chapter_num}}. {{title}}\n"
     
     # Get quiz count
     cursor.execute("SELECT COUNT(*) FROM quizzes")
     quiz_count = cursor.fetchone()[0]
     if quiz_count > 0:
-        info += f"\\nQuizzes Available: {{quiz_count}}\\n"
+        info += f"\nQuizzes Available: {{quiz_count}}\n"
         
     # Get exam count  
     cursor.execute("SELECT COUNT(*) FROM exams")
     exam_count = cursor.fetchone()[0]
     if exam_count > 0:
-        info += f"Exams Available: {{exam_count}}\\n"
+        info += f"Exams Available: {{exam_count}}\n"
         
     # Get resource count
     cursor.execute("SELECT COUNT(*) FROM resources")
     resource_count = cursor.fetchone()[0]
     if resource_count > 0:
-        info += f"Resources Available: {{resource_count}}\\n"
+        info += f"Resources Available: {{resource_count}}\n"
     
+    conn.close()
     return info
 
 @mcp.tool()
@@ -703,26 +775,26 @@ def get_chapter_content(student_id: str, chapter_number: int) -> str:
     """, (chapter_number,))
     
     chapter_data = cursor.fetchone()
-    conn.close()
-    
     if not chapter_data:
         cursor.execute("SELECT COUNT(*) FROM chapters")
-        total_chapters = cursor.fetchone()[0] if cursor.fetchone() else 0
+        total_chapters = cursor.fetchone()[0]
+        conn.close()
         return f"Chapter {{chapter_number}} does not exist. Available chapters: 1-{{total_chapters}}"
     
     title, description, content_json, summary, objectives_json = chapter_data
+    conn.close()
     
-    content = f"# {{title}}\\n\\n"
-    content += f"**Description:** {{description or 'No description'}}\\n\\n"
+    content = f"# {{title}}\n\n"
+    content += f"**Description:** {{description or 'No description'}}\n\n"
     
     # Parse objectives
     try:
         objectives = json.loads(objectives_json) if objectives_json else []
         if objectives:
-            content += "**Learning Objectives:**\\n"
+            content += "**Learning Objectives:**\n"
             for obj in objectives:
-                content += f"- {{obj}}\\n"
-            content += "\\n"
+                content += f"- {{obj}}\n"
+            content += "\n"
     except json.JSONDecodeError:
         pass
     
@@ -730,26 +802,26 @@ def get_chapter_content(student_id: str, chapter_number: int) -> str:
     try:
         content_items = json.loads(content_json) if content_json else []
         if content_items:
-            content += "**Content:**\\n\\n"
+            content += "**Content:**\n\n"
             for item in content_items:
                 if item['type'] == 'text':
-                    content += f"### {{item.get('title', 'Section')}}\\n"
-                    content += f"{{item.get('body', '')}}\\n\\n"
+                    content += f"### {{item.get('title', 'Section')}}\n"
+                    content += f"{{item.get('body', '')}}\n\n"
                 elif item['type'] == 'example':
-                    content += f"### {{item.get('title', 'Code Example')}}\\n"
-                    content += f"```{{item.get('language', 'python')}}\\n"
-                    content += f"{{item.get('code', '').replace('\\\\n', chr(10))}}\\n"
-                    content += f"```\\n"
+                    content += f"### {{item.get('title', 'Code Example')}}\n"
+                    content += f"```{{item.get('language', 'python')}}\n"
+                    content += f"{{item.get('code', '').replace('\\n', chr(10))}}\n"
+                    content += f"```\n"
                     if 'explanation' in item:
-                        content += f"*{{item['explanation']}}*\\n\\n"
+                        content += f"*{{item['explanation']}}*\n\n"
                 elif item['type'] == 'video':
-                    content += f"### {{item.get('title', 'Video')}}\\n"
-                    content += f"Video URL: {{item.get('url', '')}}\\n\\n"
+                    content += f"### {{item.get('title', 'Video')}}\n"
+                    content += f"Video URL: {{item.get('url', '')}}\n\n"
     except json.JSONDecodeError:
-        content += "Content format error.\\n\\n"
+        content += "Content format error.\n\n"
     
     if summary:
-        content += f"**Summary:**\\n{{summary}}\\n"
+        content += f"**Summary:**\n{{summary}}\n"
     
     return content
 
@@ -764,7 +836,7 @@ def list_available_quizzes() -> str:
         SELECT q.quiz_number, q.title, q.time_limit, q.passing_score, 
                COUNT(qs.question_number) as question_count
         FROM quizzes q
-        LEFT JOIN questions qs ON q.quiz_number = qs.quiz_id
+        LEFT JOIN questions qs ON q.id = qs.quiz_id
         GROUP BY q.quiz_number, q.title, q.time_limit, q.passing_score
         ORDER BY q.quiz_number
     """)
@@ -774,15 +846,15 @@ def list_available_quizzes() -> str:
         conn.close()
         return "No quizzes available in this course."
     
-    quiz_list = "Available Quizzes:\\n\\n"
+    quiz_list = "Available Quizzes:\n\n"
     for quiz_num, title, time_limit, passing_score, question_count in quizzes:
-        quiz_list += f"{{quiz_num}}. {{title}}\\n"
-        quiz_list += f"   Questions: {{question_count}}\\n"
+        quiz_list += f"{{quiz_num}}. {{title}}\n"
+        quiz_list += f"   Questions: {{question_count}}\n"
         if time_limit:
-            quiz_list += f"   Time Limit: {{time_limit}}\\n"
+            quiz_list += f"   Time Limit: {{time_limit}}\n"
         if passing_score:
-            quiz_list += f"   Passing Score: {{passing_score}}%\\n"
-        quiz_list += "\\n"
+            quiz_list += f"   Passing Score: {{passing_score}}%\n"
+        quiz_list += "\n"
     
     conn.close()
     return quiz_list
@@ -852,13 +924,13 @@ def start_quiz(student_id: str, quiz_number: int) -> str:
     # Return current question
     if current_question < len(questions):
         question_num, question_text, hint = questions[current_question]
-        response = f"**{{title}}**\\n\\n"
-        response += f"{{instructions}}\\n\\n" if instructions else "Test your understanding. Each question is worth equal points.\\n\\n"
-        response += f"**Question {{current_question + 1}} of {{len(questions)}}:**\\n"
-        response += f"{{question_text}}\\n\\n"
+        response = f"**{{title}}**\n\n"
+        response += f"{{instructions}}\n\n" if instructions else "Test your understanding. Each question is worth equal points.\n\n"
+        response += f"**Question {{current_question + 1}} of {{len(questions)}}:**\n"
+        response += f"{{question_text}}\n\n"
         
         if hint:
-            response += f"*Hint: {{hint}}*\\n\\n"
+            response += f"*Hint: {{hint}}*\n\n"
             
         response += "Use submit_quiz_answer() to submit your answer."
         
@@ -887,7 +959,7 @@ def submit_quiz_answer(student_id: str, quiz_number: int, answer: str) -> str:
     
     # Get quiz and question information from database
     cursor.execute("""
-        SELECT q.quiz_id, qu.passing_score FROM quiz_sessions qs
+        SELECT q.id, qu.passing_score FROM quiz_sessions qs
         JOIN quizzes qu ON qs.quiz_number = qu.quiz_number
         JOIN questions q ON qu.id = q.quiz_id
         WHERE qs.id = ? AND q.question_number = ?
@@ -914,14 +986,14 @@ def submit_quiz_answer(student_id: str, quiz_number: int, answer: str) -> str:
     correct_answer, explanation = question_data
     
     # Check if answer is correct
-    if correct_answer.lower() in ['true', 'false']:
+    if isinstance(correct_answer, str) and correct_answer.lower() in ['true', 'false']:
         # For boolean answers, convert user input to boolean
         user_answer_bool = answer.lower().strip() in ['true', 'yes', '1', 'correct']
         correct_answer_bool = correct_answer.lower() == 'true'
         is_correct = user_answer_bool == correct_answer_bool
     else:
         # For string answers, do case-insensitive comparison
-        is_correct = answer.lower().strip() == correct_answer.lower().strip()
+        is_correct = str(answer).lower().strip() == str(correct_answer).lower().strip()
     
     # Store the answer
     cursor.execute("""
@@ -929,16 +1001,16 @@ def submit_quiz_answer(student_id: str, quiz_number: int, answer: str) -> str:
         VALUES (?, ?, ?, ?, ?)
     """, (session_id, current_q, answer, correct_answer, is_correct))
     
-    response = f"Answer submitted: {{answer}}\\n"
+    response = f"Answer submitted: {{answer}}\n"
     
     if is_correct:
-        response += "✓ Correct!\\n"
+        response += "✓ Correct!\n"
     else:
-        response += f"✗ Incorrect. The correct answer was: {{correct_answer}}\\n"
+        response += f"✗ Incorrect. The correct answer was: {{correct_answer}}\n"
     
     # Show explanation if available
     if explanation:
-        response += f"Explanation: {{explanation}}\\n"
+        response += f"Explanation: {{explanation}}\n"
     
     # Move to next question
     next_question = current_q + 1
@@ -958,10 +1030,10 @@ def submit_quiz_answer(student_id: str, quiz_number: int, answer: str) -> str:
         next_q_data = cursor.fetchone()
         if next_q_data:
             question_text, hint = next_q_data
-            response += f"\\n**Question {{next_question + 1}} of {{total_questions}}:**\\n"
-            response += f"{{question_text}}\\n"
+            response += f"\n**Question {{next_question + 1}} of {{total_questions}}:**\n"
+            response += f"{{question_text}}\n"
             if hint:
-                response += f"*Hint: {{hint}}*\\n"
+                response += f"*Hint: {{hint}}*\n"
     else:
         # Quiz completed - calculate score
         cursor.execute("""
@@ -987,58 +1059,8 @@ def submit_quiz_answer(student_id: str, quiz_number: int, answer: str) -> str:
             VALUES (?, ?, ?, ?, ?, ?)
         """, (student_id, quiz_number, correct, total, score, passed))
         
-        response += f"\\n**Quiz Completed!**\\n"
-        response += f"Score: {{correct}}/{{total}} ({{score:.1f}}%)\\n"
-        
-        if passed:
-            response += "🎉 You passed!"
-        else:
-            response += f"You need {{passing_score}}% to pass. Try again!"
-    
-    conn.commit()
-    conn.close()
-    
-    return response
-    
-    if next_question < len(quiz['questions']):
-        # Update session to next question
-        cursor.execute("""
-            UPDATE quiz_sessions SET current_question = ? WHERE id = ?
-        """, (next_question, session_id))
-        
-        next_q = quiz['questions'][next_question]
-        response += f"\\n**Question {{next_question + 1}} of {{len(quiz['questions'])}}:**\\n"
-        response += f"{{next_q['question']}}\\n"
-        if 'hint' in next_q:
-            response += f"*Hint: {{next_q['hint']}}*\\n"
-    else:
-        # Quiz completed - calculate score
-        cursor.execute("""
-            SELECT COUNT(*) as total, SUM(CASE WHEN is_correct THEN 1 ELSE 0 END) as correct
-            FROM quiz_answers WHERE session_id = ?
-        """, (session_id,))
-        
-        total, correct = cursor.fetchone()
-        score = (correct / total * 100) if total > 0 else 0
-        
-        # Mark session as completed
-        cursor.execute("""
-            UPDATE quiz_sessions SET status = 'completed', completed_at = CURRENT_TIMESTAMP 
-            WHERE id = ?
-        """, (session_id,))
-        
-        # Store final score
-        passing_score = quiz.get('settings', {{}}).get('passing_score', 70)
-        passed = score >= passing_score
-        
-        cursor.execute("""
-            INSERT OR REPLACE INTO quiz_scores 
-            (student_id, quiz_number, score, max_score, percentage, passed)
-            VALUES (?, ?, ?, ?, ?, ?)
-        """, (student_id, quiz_number, correct, total, score, passed))
-        
-        response += f"\\n**Quiz Completed!**\\n"
-        response += f"Score: {{correct}}/{{total}} ({{score:.1f}}%)\\n"
+        response += f"\n**Quiz Completed!**\n"
+        response += f"Score: {{correct}}/{{total}} ({{score:.1f}}%)\n"
         
         if passed:
             response += "🎉 You passed!"
@@ -1079,10 +1101,10 @@ def get_quiz_results(student_id: str, quiz_number: int) -> str:
     
     score, max_score, percentage, passed, completed_at, quiz_title, passing_score = result
     
-    result_text = f"**{{quiz_title}} Results**\\n"
-    result_text += f"Score: {{percentage:.1f}}%\\n"
-    result_text += f"Status: {{'PASSED' if passed else 'FAILED'}}\\n"
-    result_text += f"Passing Score: {{passing_score}}%"
+    result_text = f"**{{quiz_title}} Results**\n"
+    result_text += f"Score: {{percentage:.1f}}%\n"
+    result_text += f"Status: {{'PASSED' if passed else 'FAILED'}}\n"
+    result_text += f"Passing Score: {{passing_score}}%\n"
     
     return result_text
 
@@ -1102,22 +1124,26 @@ def get_student_progress(student_id: str) -> str:
     
     name, current_chapter, last_activity, created_at = result
     
-    # Get course metadata from database structure
+    # Get course metadata from files
+    md = load_course_from_files(MAIN_JSON_PATH).get('metadata', {{}})
+    course_name_local = md.get('name', "{course_name}")
+    
+    # Get course structure counts
     cursor.execute("SELECT COUNT(*) FROM chapters")
     total_chapters = cursor.fetchone()[0]
     
-    report = f"**Progress Report for {{name}}**\\n\\n"
-    report += f"**Course:** {course_name}\\n"
-    report += f"**Enrolled:** {{created_at}}\\n"
-    report += f"**Last Activity:** {{last_activity}}\\n\\n"
+    report = f"**Progress Report for {{name}}**\n\n"
+    report += f"**Course:** {{course_name_local}}\n"
+    report += f"**Enrolled:** {{created_at}}\n"
+    report += f"**Last Activity:** {{last_activity}}\n\n"
     
     # Chapter progress
     cursor.execute("SELECT COUNT(*) FROM chapter_progress WHERE student_id = ? AND completed = 1", (student_id,))
     completed_chapters = cursor.fetchone()[0]
     
-    report += f"**Chapter Progress:**\\n"
-    report += f"Current Chapter: {{current_chapter}}\\n"
-    report += f"Completed Chapters: {{completed_chapters}}/{{total_chapters}}\\n\\n"
+    report += f"**Chapter Progress:**\n"
+    report += f"Current Chapter: {{current_chapter}}\n"
+    report += f"Completed Chapters: {{completed_chapters}}/{{total_chapters}}\n\n"
     
     # Quiz scores
     cursor.execute("""
@@ -1130,20 +1156,21 @@ def get_student_progress(student_id: str) -> str:
     quiz_results = cursor.fetchall()
     
     if quiz_results:
-        report += f"**Quiz Scores:**\\n"
+        report += f"**Quiz Scores:**\n"
         for quiz_num, percentage, passed in quiz_results:
             status = "✅" if passed else "❌"
-            report += f"Quiz {{quiz_num}}: {{percentage:.1f}}% {{status}}\\n"
+            report += f"Quiz {{quiz_num}}: {{percentage:.1f}}% {{status}}\n"
     else:
-        report += f"**Quiz Scores:** No quizzes completed\\n"
+        report += f"**Quiz Scores:** No quizzes completed\n"
     
     # Overall progress
-    total_quizzes = len(course['quizzes'])
+    cursor.execute("SELECT COUNT(*) FROM quizzes")
+    total_quizzes = cursor.fetchone()[0]
     completed_quizzes = len(quiz_results)
     
     if total_quizzes > 0:
         quiz_completion = (completed_quizzes / total_quizzes) * 100
-        report += f"\\n**Overall Quiz Completion:** {{quiz_completion:.1f}}%"
+        report += f"\n**Overall Quiz Completion:** {{quiz_completion:.1f}}%\n"
     
     conn.close()
     return report
