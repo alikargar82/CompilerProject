@@ -23,11 +23,14 @@
     },
     {
       "type": "exam",
-      "ref": "exams/midterm.json"
+      "ref": "exams/midterm.json",
+      "modes" : ["mcq","coding"]
     },
     {
       "type": "exam",
-      "ref": "exams/final.json"
+      "ref": "exams/final.json",
+      "modes": ["mcq", "essay"]
+
     }
   ]
 }

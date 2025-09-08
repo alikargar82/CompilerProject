@@ -1,5 +1,6 @@
 {
   "title": "Simple Quiz",
+  "instructions": "practice makes perfect",
   "settings": {
     "randomize_questions": false,
     "attempts_allowed": 2,
