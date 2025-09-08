@@ -16,8 +16,7 @@ courseIntro
         '"name"' COLON STRING COMMA
         '"author"' COLON STRING COMMA
         '"description"' COLON STRING COMMA
-        '"level"' COLON STRING COMMA
-        '"tags"' COLON array
+        '"level"' COLON STRING
       RBRACE
     ;
 

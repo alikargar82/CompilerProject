@@ -12,6 +12,10 @@ class CustomCourseListener(CourseListener):
 		self.rule_names = []
 		self.ast = AST()
 
+
+	def exitArray(self, ctx: CourseParser.ArrayContext):
+		make_ast_subtree(self.ast, ctx, "array", keep_node=True)
+
 	def exitCourseIntro(self, ctx: CourseParser.CourseIntroContext):
 		make_ast_subtree(self.ast, ctx, "course_intro", keep_node=True)
 
@@ -103,8 +107,6 @@ class CustomCourseListener(CourseListener):
 				make_ast_subtree(self.ast, ctx, f"metadata_description_{value}", keep_node=True)
 			elif key == "level":
 				make_ast_subtree(self.ast, ctx, f"metadata_level_{value}", keep_node=True)
-			elif key == "tags":
-				make_ast_subtree(self.ast, ctx, f"metadata_tags_{value}", keep_node=True)
 			else:
 				make_ast_subtree(self.ast, ctx, f"pair_{key}_{value}", keep_node=True)
 		else:

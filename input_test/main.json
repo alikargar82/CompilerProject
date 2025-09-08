@@ -4,11 +4,7 @@
     "name": "Intro to Python",
     "author": "Dr. Sarah Chen",
     "description": "A simple Python course.",
-    "level": "beginner",
-      "tags": [
-        "python",
-        "oop"
-      ]    
+    "level": "beginner"
    },
   "flow": [
     {

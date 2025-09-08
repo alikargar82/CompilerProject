@@ -10,51 +10,50 @@ else:
 
 def serializedATN():
     return [
-        4,1,25,142,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,24,138,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,1,0,1,0,
         1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,2,1,2,1,2,1,2,1,2,1,2,1,2,
-        1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,3,
-        1,3,1,3,1,3,1,4,1,4,1,4,1,4,5,4,68,8,4,10,4,12,4,71,9,4,1,4,1,4,
-        1,5,1,5,1,5,3,5,78,8,5,1,5,1,5,1,5,1,5,3,5,84,8,5,3,5,86,8,5,1,5,
-        1,5,1,6,1,6,1,6,1,6,1,7,1,7,1,7,1,7,1,7,1,8,1,8,1,8,1,8,1,8,1,9,
-        1,9,1,9,1,9,5,9,108,8,9,10,9,12,9,111,9,9,3,9,113,8,9,1,9,1,9,1,
-        10,1,10,1,10,1,10,5,10,121,8,10,10,10,12,10,124,9,10,3,10,126,8,
-        10,1,10,1,10,1,11,1,11,1,11,1,11,1,12,1,12,1,12,1,12,1,12,1,12,3,
-        12,140,8,12,1,12,0,0,13,0,2,4,6,8,10,12,14,16,18,20,22,24,0,0,141,
-        0,26,1,0,0,0,2,33,1,0,0,0,4,37,1,0,0,0,6,59,1,0,0,0,8,63,1,0,0,0,
-        10,74,1,0,0,0,12,89,1,0,0,0,14,93,1,0,0,0,16,98,1,0,0,0,18,103,1,
-        0,0,0,20,116,1,0,0,0,22,129,1,0,0,0,24,139,1,0,0,0,26,27,5,11,0,
-        0,27,28,3,2,1,0,28,29,5,15,0,0,29,30,3,6,3,0,30,31,5,12,0,0,31,32,
-        5,0,0,1,32,1,1,0,0,0,33,34,5,1,0,0,34,35,5,16,0,0,35,36,3,4,2,0,
-        36,3,1,0,0,0,37,38,5,11,0,0,38,39,5,2,0,0,39,40,5,16,0,0,40,41,5,
-        19,0,0,41,42,5,15,0,0,42,43,5,3,0,0,43,44,5,16,0,0,44,45,5,19,0,
-        0,45,46,5,15,0,0,46,47,5,4,0,0,47,48,5,16,0,0,48,49,5,19,0,0,49,
-        50,5,15,0,0,50,51,5,5,0,0,51,52,5,16,0,0,52,53,5,19,0,0,53,54,5,
-        15,0,0,54,55,5,6,0,0,55,56,5,16,0,0,56,57,3,20,10,0,57,58,5,12,0,
-        0,58,5,1,0,0,0,59,60,5,7,0,0,60,61,5,16,0,0,61,62,3,8,4,0,62,7,1,
-        0,0,0,63,64,5,13,0,0,64,69,3,10,5,0,65,66,5,15,0,0,66,68,3,10,5,
-        0,67,65,1,0,0,0,68,71,1,0,0,0,69,67,1,0,0,0,69,70,1,0,0,0,70,72,
-        1,0,0,0,71,69,1,0,0,0,72,73,5,14,0,0,73,9,1,0,0,0,74,75,5,11,0,0,
-        75,85,3,12,6,0,76,78,3,14,7,0,77,76,1,0,0,0,77,78,1,0,0,0,78,79,
-        1,0,0,0,79,86,3,16,8,0,80,81,3,16,8,0,81,82,3,14,7,0,82,84,1,0,0,
-        0,83,80,1,0,0,0,83,84,1,0,0,0,84,86,1,0,0,0,85,77,1,0,0,0,85,83,
-        1,0,0,0,86,87,1,0,0,0,87,88,5,12,0,0,88,11,1,0,0,0,89,90,5,8,0,0,
-        90,91,5,16,0,0,91,92,5,18,0,0,92,13,1,0,0,0,93,94,5,15,0,0,94,95,
-        5,9,0,0,95,96,5,16,0,0,96,97,5,19,0,0,97,15,1,0,0,0,98,99,5,15,0,
-        0,99,100,5,10,0,0,100,101,5,16,0,0,101,102,3,20,10,0,102,17,1,0,
-        0,0,103,112,5,11,0,0,104,109,3,22,11,0,105,106,5,15,0,0,106,108,
-        3,22,11,0,107,105,1,0,0,0,108,111,1,0,0,0,109,107,1,0,0,0,109,110,
-        1,0,0,0,110,113,1,0,0,0,111,109,1,0,0,0,112,104,1,0,0,0,112,113,
-        1,0,0,0,113,114,1,0,0,0,114,115,5,12,0,0,115,19,1,0,0,0,116,125,
-        5,13,0,0,117,122,3,24,12,0,118,119,5,15,0,0,119,121,3,24,12,0,120,
-        118,1,0,0,0,121,124,1,0,0,0,122,120,1,0,0,0,122,123,1,0,0,0,123,
-        126,1,0,0,0,124,122,1,0,0,0,125,117,1,0,0,0,125,126,1,0,0,0,126,
-        127,1,0,0,0,127,128,5,14,0,0,128,21,1,0,0,0,129,130,5,19,0,0,130,
-        131,5,16,0,0,131,132,3,24,12,0,132,23,1,0,0,0,133,140,5,19,0,0,134,
-        140,5,20,0,0,135,140,5,22,0,0,136,140,5,17,0,0,137,140,3,18,9,0,
-        138,140,3,20,10,0,139,133,1,0,0,0,139,134,1,0,0,0,139,135,1,0,0,
-        0,139,136,1,0,0,0,139,137,1,0,0,0,139,138,1,0,0,0,140,25,1,0,0,0,
-        9,69,77,83,85,109,112,122,125,139
+        1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,3,1,3,1,3,1,3,1,4,
+        1,4,1,4,1,4,5,4,64,8,4,10,4,12,4,67,9,4,1,4,1,4,1,5,1,5,1,5,3,5,
+        74,8,5,1,5,1,5,1,5,1,5,3,5,80,8,5,3,5,82,8,5,1,5,1,5,1,6,1,6,1,6,
+        1,6,1,7,1,7,1,7,1,7,1,7,1,8,1,8,1,8,1,8,1,8,1,9,1,9,1,9,1,9,5,9,
+        104,8,9,10,9,12,9,107,9,9,3,9,109,8,9,1,9,1,9,1,10,1,10,1,10,1,10,
+        5,10,117,8,10,10,10,12,10,120,9,10,3,10,122,8,10,1,10,1,10,1,11,
+        1,11,1,11,1,11,1,12,1,12,1,12,1,12,1,12,1,12,3,12,136,8,12,1,12,
+        0,0,13,0,2,4,6,8,10,12,14,16,18,20,22,24,0,0,137,0,26,1,0,0,0,2,
+        33,1,0,0,0,4,37,1,0,0,0,6,55,1,0,0,0,8,59,1,0,0,0,10,70,1,0,0,0,
+        12,85,1,0,0,0,14,89,1,0,0,0,16,94,1,0,0,0,18,99,1,0,0,0,20,112,1,
+        0,0,0,22,125,1,0,0,0,24,135,1,0,0,0,26,27,5,10,0,0,27,28,3,2,1,0,
+        28,29,5,14,0,0,29,30,3,6,3,0,30,31,5,11,0,0,31,32,5,0,0,1,32,1,1,
+        0,0,0,33,34,5,1,0,0,34,35,5,15,0,0,35,36,3,4,2,0,36,3,1,0,0,0,37,
+        38,5,10,0,0,38,39,5,2,0,0,39,40,5,15,0,0,40,41,5,18,0,0,41,42,5,
+        14,0,0,42,43,5,3,0,0,43,44,5,15,0,0,44,45,5,18,0,0,45,46,5,14,0,
+        0,46,47,5,4,0,0,47,48,5,15,0,0,48,49,5,18,0,0,49,50,5,14,0,0,50,
+        51,5,5,0,0,51,52,5,15,0,0,52,53,5,18,0,0,53,54,5,11,0,0,54,5,1,0,
+        0,0,55,56,5,6,0,0,56,57,5,15,0,0,57,58,3,8,4,0,58,7,1,0,0,0,59,60,
+        5,12,0,0,60,65,3,10,5,0,61,62,5,14,0,0,62,64,3,10,5,0,63,61,1,0,
+        0,0,64,67,1,0,0,0,65,63,1,0,0,0,65,66,1,0,0,0,66,68,1,0,0,0,67,65,
+        1,0,0,0,68,69,5,13,0,0,69,9,1,0,0,0,70,71,5,10,0,0,71,81,3,12,6,
+        0,72,74,3,14,7,0,73,72,1,0,0,0,73,74,1,0,0,0,74,75,1,0,0,0,75,82,
+        3,16,8,0,76,77,3,16,8,0,77,78,3,14,7,0,78,80,1,0,0,0,79,76,1,0,0,
+        0,79,80,1,0,0,0,80,82,1,0,0,0,81,73,1,0,0,0,81,79,1,0,0,0,82,83,
+        1,0,0,0,83,84,5,11,0,0,84,11,1,0,0,0,85,86,5,7,0,0,86,87,5,15,0,
+        0,87,88,5,17,0,0,88,13,1,0,0,0,89,90,5,14,0,0,90,91,5,8,0,0,91,92,
+        5,15,0,0,92,93,5,18,0,0,93,15,1,0,0,0,94,95,5,14,0,0,95,96,5,9,0,
+        0,96,97,5,15,0,0,97,98,3,20,10,0,98,17,1,0,0,0,99,108,5,10,0,0,100,
+        105,3,22,11,0,101,102,5,14,0,0,102,104,3,22,11,0,103,101,1,0,0,0,
+        104,107,1,0,0,0,105,103,1,0,0,0,105,106,1,0,0,0,106,109,1,0,0,0,
+        107,105,1,0,0,0,108,100,1,0,0,0,108,109,1,0,0,0,109,110,1,0,0,0,
+        110,111,5,11,0,0,111,19,1,0,0,0,112,121,5,12,0,0,113,118,3,24,12,
+        0,114,115,5,14,0,0,115,117,3,24,12,0,116,114,1,0,0,0,117,120,1,0,
+        0,0,118,116,1,0,0,0,118,119,1,0,0,0,119,122,1,0,0,0,120,118,1,0,
+        0,0,121,113,1,0,0,0,121,122,1,0,0,0,122,123,1,0,0,0,123,124,5,13,
+        0,0,124,21,1,0,0,0,125,126,5,18,0,0,126,127,5,15,0,0,127,128,3,24,
+        12,0,128,23,1,0,0,0,129,136,5,18,0,0,130,136,5,19,0,0,131,136,5,
+        21,0,0,132,136,5,16,0,0,133,136,3,18,9,0,134,136,3,20,10,0,135,129,
+        1,0,0,0,135,130,1,0,0,0,135,131,1,0,0,0,135,132,1,0,0,0,135,133,
+        1,0,0,0,135,134,1,0,0,0,136,25,1,0,0,0,9,65,73,79,81,105,108,118,
+        121,135
     ]
 
 class CourseParser ( Parser ):
@@ -69,16 +68,15 @@ class CourseParser ( Parser ):
 
     literalNames = [ "<INVALID>", "'\"course_introduction\"'", "'\"name\"'", 
                      "'\"author\"'", "'\"description\"'", "'\"level\"'", 
-                     "'\"tags\"'", "'\"flow\"'", "'\"type\"'", "'\"ref\"'", 
-                     "'\"modes\"'", "'{'", "'}'", "'['", "']'", "','", "':'", 
-                     "'null'" ]
+                     "'\"flow\"'", "'\"type\"'", "'\"ref\"'", "'\"modes\"'", 
+                     "'{'", "'}'", "'['", "']'", "','", "':'", "'null'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "LBRACE", "RBRACE", 
-                      "LBRACKET", "RBRACKET", "COMMA", "COLON", "NULL", 
-                      "TYPES", "STRING", "NUMBER", "INT", "BOOLEAN", "WS", 
-                      "LINE_COMMENT", "BLOCK_COMMENT" ]
+                      "<INVALID>", "<INVALID>", "LBRACE", "RBRACE", "LBRACKET", 
+                      "RBRACKET", "COMMA", "COLON", "NULL", "TYPES", "STRING", 
+                      "NUMBER", "INT", "BOOLEAN", "WS", "LINE_COMMENT", 
+                      "BLOCK_COMMENT" ]
 
     RULE_courseFile = 0
     RULE_courseIntroduction = 1
@@ -108,22 +106,21 @@ class CourseParser ( Parser ):
     T__6=7
     T__7=8
     T__8=9
-    T__9=10
-    LBRACE=11
-    RBRACE=12
-    LBRACKET=13
-    RBRACKET=14
-    COMMA=15
-    COLON=16
-    NULL=17
-    TYPES=18
-    STRING=19
-    NUMBER=20
-    INT=21
-    BOOLEAN=22
-    WS=23
-    LINE_COMMENT=24
-    BLOCK_COMMENT=25
+    LBRACE=10
+    RBRACE=11
+    LBRACKET=12
+    RBRACKET=13
+    COMMA=14
+    COLON=15
+    NULL=16
+    TYPES=17
+    STRING=18
+    NUMBER=19
+    INT=20
+    BOOLEAN=21
+    WS=22
+    LINE_COMMENT=23
+    BLOCK_COMMENT=24
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -291,10 +288,6 @@ class CourseParser ( Parser ):
             else:
                 return self.getToken(CourseParser.COMMA, i)
 
-        def array(self):
-            return self.getTypedRuleContext(CourseParser.ArrayContext,0)
-
-
         def RBRACE(self):
             return self.getToken(CourseParser.RBRACE, 0)
 
@@ -357,14 +350,6 @@ class CourseParser ( Parser ):
             self.state = 52
             self.match(CourseParser.STRING)
             self.state = 53
-            self.match(CourseParser.COMMA)
-            self.state = 54
-            self.match(CourseParser.T__5)
-            self.state = 55
-            self.match(CourseParser.COLON)
-            self.state = 56
-            self.array()
-            self.state = 57
             self.match(CourseParser.RBRACE)
         except RecognitionException as re:
             localctx.exception = re
@@ -415,11 +400,11 @@ class CourseParser ( Parser ):
         self.enterRule(localctx, 6, self.RULE_flow)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 59
-            self.match(CourseParser.T__6)
-            self.state = 60
+            self.state = 55
+            self.match(CourseParser.T__5)
+            self.state = 56
             self.match(CourseParser.COLON)
-            self.state = 61
+            self.state = 57
             self.arrayOfFlowItems()
         except RecognitionException as re:
             localctx.exception = re
@@ -483,23 +468,23 @@ class CourseParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 63
+            self.state = 59
             self.match(CourseParser.LBRACKET)
-            self.state = 64
+            self.state = 60
             self.flowItem()
-            self.state = 69
+            self.state = 65
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==15:
-                self.state = 65
+            while _la==14:
+                self.state = 61
                 self.match(CourseParser.COMMA)
-                self.state = 66
+                self.state = 62
                 self.flowItem()
-                self.state = 71
+                self.state = 67
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 72
+            self.state = 68
             self.match(CourseParser.RBRACKET)
         except RecognitionException as re:
             localctx.exception = re
@@ -562,41 +547,41 @@ class CourseParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 74
+            self.state = 70
             self.match(CourseParser.LBRACE)
-            self.state = 75
+            self.state = 71
             self.type_()
-            self.state = 85
+            self.state = 81
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,3,self._ctx)
             if la_ == 1:
-                self.state = 77
+                self.state = 73
                 self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,1,self._ctx)
                 if la_ == 1:
-                    self.state = 76
+                    self.state = 72
                     self.ref()
 
 
-                self.state = 79
+                self.state = 75
                 self.modes()
                 pass
 
             elif la_ == 2:
-                self.state = 83
+                self.state = 79
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==15:
-                    self.state = 80
+                if _la==14:
+                    self.state = 76
                     self.modes()
-                    self.state = 81
+                    self.state = 77
                     self.ref()
 
 
                 pass
 
 
-            self.state = 87
+            self.state = 83
             self.match(CourseParser.RBRACE)
         except RecognitionException as re:
             localctx.exception = re
@@ -646,11 +631,11 @@ class CourseParser ( Parser ):
         self.enterRule(localctx, 12, self.RULE_type)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 89
-            self.match(CourseParser.T__7)
-            self.state = 90
+            self.state = 85
+            self.match(CourseParser.T__6)
+            self.state = 86
             self.match(CourseParser.COLON)
-            self.state = 91
+            self.state = 87
             self.match(CourseParser.TYPES)
         except RecognitionException as re:
             localctx.exception = re
@@ -703,13 +688,13 @@ class CourseParser ( Parser ):
         self.enterRule(localctx, 14, self.RULE_ref)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 93
+            self.state = 89
             self.match(CourseParser.COMMA)
-            self.state = 94
-            self.match(CourseParser.T__8)
-            self.state = 95
+            self.state = 90
+            self.match(CourseParser.T__7)
+            self.state = 91
             self.match(CourseParser.COLON)
-            self.state = 96
+            self.state = 92
             self.match(CourseParser.STRING)
         except RecognitionException as re:
             localctx.exception = re
@@ -763,13 +748,13 @@ class CourseParser ( Parser ):
         self.enterRule(localctx, 16, self.RULE_modes)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 98
+            self.state = 94
             self.match(CourseParser.COMMA)
-            self.state = 99
-            self.match(CourseParser.T__9)
-            self.state = 100
+            self.state = 95
+            self.match(CourseParser.T__8)
+            self.state = 96
             self.match(CourseParser.COLON)
-            self.state = 101
+            self.state = 97
             self.array()
         except RecognitionException as re:
             localctx.exception = re
@@ -833,29 +818,29 @@ class CourseParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 103
+            self.state = 99
             self.match(CourseParser.LBRACE)
-            self.state = 112
+            self.state = 108
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==19:
-                self.state = 104
+            if _la==18:
+                self.state = 100
                 self.pair()
-                self.state = 109
+                self.state = 105
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while _la==15:
-                    self.state = 105
+                while _la==14:
+                    self.state = 101
                     self.match(CourseParser.COMMA)
-                    self.state = 106
+                    self.state = 102
                     self.pair()
-                    self.state = 111
+                    self.state = 107
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
 
 
-            self.state = 114
+            self.state = 110
             self.match(CourseParser.RBRACE)
         except RecognitionException as re:
             localctx.exception = re
@@ -919,29 +904,29 @@ class CourseParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 116
+            self.state = 112
             self.match(CourseParser.LBRACKET)
-            self.state = 125
+            self.state = 121
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 5908480) != 0):
-                self.state = 117
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 2954240) != 0):
+                self.state = 113
                 self.value()
-                self.state = 122
+                self.state = 118
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while _la==15:
-                    self.state = 118
+                while _la==14:
+                    self.state = 114
                     self.match(CourseParser.COMMA)
-                    self.state = 119
+                    self.state = 115
                     self.value()
-                    self.state = 124
+                    self.state = 120
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
 
 
-            self.state = 127
+            self.state = 123
             self.match(CourseParser.RBRACKET)
         except RecognitionException as re:
             localctx.exception = re
@@ -995,11 +980,11 @@ class CourseParser ( Parser ):
         self.enterRule(localctx, 22, self.RULE_pair)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 129
+            self.state = 125
             self.match(CourseParser.STRING)
-            self.state = 130
+            self.state = 126
             self.match(CourseParser.COLON)
-            self.state = 131
+            self.state = 127
             self.value()
         except RecognitionException as re:
             localctx.exception = re
@@ -1062,37 +1047,37 @@ class CourseParser ( Parser ):
         localctx = CourseParser.ValueContext(self, self._ctx, self.state)
         self.enterRule(localctx, 24, self.RULE_value)
         try:
-            self.state = 139
+            self.state = 135
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [19]:
+            if token in [18]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 133
+                self.state = 129
                 self.match(CourseParser.STRING)
                 pass
-            elif token in [20]:
+            elif token in [19]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 134
+                self.state = 130
                 self.match(CourseParser.NUMBER)
                 pass
-            elif token in [22]:
+            elif token in [21]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 135
+                self.state = 131
                 self.match(CourseParser.BOOLEAN)
                 pass
-            elif token in [17]:
+            elif token in [16]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 136
+                self.state = 132
                 self.match(CourseParser.NULL)
                 pass
-            elif token in [11]:
+            elif token in [10]:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 137
+                self.state = 133
                 self.object_()
                 pass
-            elif token in [13]:
+            elif token in [12]:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 138
+                self.state = 134
                 self.array()
                 pass
             else:
