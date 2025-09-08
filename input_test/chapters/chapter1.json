@@ -1,0 +1,17 @@
+{
+  "type": "chapter",
+  "title": "Chapter 1: Basics",
+  "content": [
+    {
+      "type": "text",
+      "title": "Variables",
+      "body": "Variables store data."
+    },
+    {
+      "type": "example",
+      "language": "python",
+      "code": "x = 5\nprint(x)",
+      "explanation": "This creates a variable and prints it."
+    }
+  ]
+}

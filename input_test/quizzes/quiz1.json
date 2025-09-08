@@ -1,0 +1,16 @@
+{
+  "title": "Simple Quiz",
+  "questions": [
+    {
+      "type": "multiple_choice",
+      "question": "What is 2 + 2?",
+      "options": ["3", "4", "5"],
+      "answer": "4"
+    },
+    {
+      "type": "short_answer",
+      "question": "What function prints to the screen?",
+      "answer": "print"
+    }
+  ]
+}

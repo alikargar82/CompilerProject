@@ -1,0 +1,22 @@
+{
+  "title": "Midterm Exam",
+  "questions": [
+    {
+      "type": "multiple_choice",
+      "question": "What is a list?",
+      "options": ["A data type", "A function", "A variable"],
+      "answer": "A data type"
+    },
+    {
+      "type": "coding",
+      "language": "python",
+      "question": "Write a function to add two numbers.",
+      "tests": [
+        {
+          "input": "add(2, 3)",
+          "expected_output": "5"
+        }
+      ]
+    }
+  ]
+}
