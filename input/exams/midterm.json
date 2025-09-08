@@ -1,0 +1,62 @@
+{
+  "title": "Python Midterm Examination",
+  "instructions": "This exam covers chapters 1-2. You have 90 minutes to complete all questions. Show your work for coding problems.",
+  "settings": {
+    "passing_score": 75,
+    "randomize_questions": false,
+    "attempts_allowed": 1,
+    "weight": 2.0
+  },
+  "questions": [
+    {
+      "type": "multiple_choice",
+      "question": "What is the output of the following code: len([1, 2, [3, 4]])?",
+      "options": ["2", "3", "4", "Error"],
+      "answer": "3",
+      "explanation": "The list has 3 elements: 1, 2, and [3, 4]. The nested list counts as one element."
+    },
+    {
+      "type": "essay",
+      "question": "Explain the difference between a function and a method in Python. Provide examples of each.",
+      "word_count": {
+        "min": 100,
+        "max": 300
+      },
+      "hint": "Think about where functions and methods are defined and how they are called",
+      "explanation": "Functions are standalone blocks of code, while methods are functions that belong to objects/classes."
+    },
+    {
+      "type": "coding",
+      "language": "python",
+      "question": "Write a function called 'calculate_grade' that takes a list of scores and returns the average as a letter grade (A: 90+, B: 80-89, C: 70-79, D: 60-69, F: <60)",
+      "tests": [
+        {
+          "input": "[95, 87, 92]",
+          "expected_output": "A"
+        },
+        {
+          "input": "[78, 82, 85]", 
+          "expected_output": "B"
+        },
+        {
+          "input": "[65, 70, 75]",
+          "expected_output": "C"
+        }
+      ],
+      "hint": "Calculate the average first, then use conditional statements for grade assignment"
+    },
+    {
+      "type": "short_answer",
+      "question": "What keyword is used to define a class in Python?",
+      "answer": "class",
+      "explanation": "The 'class' keyword is used to define classes in Python."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Which of the following is NOT a valid Python data type?",
+      "options": ["list", "dict", "array", "tuple"],
+      "answer": "array",
+      "explanation": "Python has list, dict, and tuple as built-in types. 'array' requires importing the array module."
+    }
+  ]
+}

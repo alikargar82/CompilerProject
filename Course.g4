@@ -2,88 +2,64 @@ grammar Course;
 
 // ===== ROOT =====
 courseFile
-    : metadata studentData? flow EOF
+    : object EOF
     ;
 
-// ===== METADATA =====
-metadata
-    : 'name:' STRING
-      'author:' STRING
-      'description:' STRING
-      'level:' LEVEL
-      'tags:' tagList
+// ===== JSON STRUCTURE =====
+object
+    : LBRACE (pair (COMMA pair)*)? RBRACE
     ;
 
-tagList
-    : '[' STRING (',' STRING)* ']'
+array
+    : LBRACKET (value (COMMA value)*)? RBRACKET
     ;
 
-
-// ===== STUDENT DATA =====
-studentData
-    : 'student_data:'
-      ('roster_file:' STRING)?
-      (capacity)?
-      ('classes_file:' STRING)?
-      ('enrollment_mode:' ENROLL_MODE)?
+pair
+    : STRING COLON value
     ;
 
-capacity: 'capacity:' num;
-
-num: INT;
-
-// ===== FLOW =====
-flow
-    : 'flow:'  flowItem+
+value
+    : STRING
+    | NUMBER
+    | BOOLEAN
+    | NULL
+    | object
+    | array
     ;
 
-flowItem
-    : '- type:' FLOW_TYPE
-      ('ref:'  address )?
-      'modes:' '[' mode_type (',' mode_type)* ']'
-    ;
-
-address: STRING;
-
-mode_type
-    : MODE_NAMES ;
-
-// ===== TYPES =====
-
-MODE_NAMES
-    :'form' | 'audio' | 'url' | 'video' | 'text' | 'mcq' | 'tf' | 'coding' | 'essay' | 'short_answer'
-    ;
-
-LEVEL
-    : 'beginner' | 'intermediate' | 'advanced'
-    ;
-
-FLOW_TYPE
-    : 'registration' | 'chapter' | 'quiz' | 'exam' | 'resource'
-    ;
-
-ENROLL_MODE
-    : 'open' | 'invite' | 'restricted'
-    ;
+// ===== TOKENS =====
+LBRACE      : '{' ;
+RBRACE      : '}' ;
+LBRACKET    : '[' ;
+RBRACKET    : ']' ;
+COMMA       : ',' ;
+COLON       : ':' ;
+NULL        : 'null' ;
 
 STRING
-    :  '"' (~["\r\n])* '"'
+    : '"' (~["\\\r\n] | '\\' .)* '"'
     ;
 
+NUMBER
+    : '-'? INT ('.' INT)? (('e'|'E') ('+'|'-')? INT)?
+    ;
 
 INT
-    : [0-9]+
+    : '0' | [1-9] [0-9]*
     ;
 
 BOOLEAN
     : 'true' | 'false'
     ;
 
-// ===== INDENTATION  =====
-
-
 WS
     : [ \t\r\n]+ -> skip
     ;
 
-COMMENT : '#' ~[\r\n]* -> skip ;
+LINE_COMMENT 
+    : '//' ~[\r\n]* -> skip
+    ;
+
+BLOCK_COMMENT
+    : '/*' .*? '*/' -> skip
+    ;

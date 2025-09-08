@@ -1,0 +1,42 @@
+{
+  "type": "chapter",
+  "title": "Data Types and Control Structures",
+  "description": "Deep dive into Python data types, conditional statements, and loops",
+  "objectives": [
+    "Students can work with lists, dictionaries, and tuples",
+    "Students understand conditional logic with if/elif/else",
+    "Students can implement loops for iteration and control flow"
+  ],
+  "content": [
+    {
+      "type": "text",
+      "title": "Python Data Types",
+      "body": "Python has several built-in data types: integers (int), floating-point numbers (float), strings (str), booleans (bool), lists, tuples, and dictionaries. Each type serves different purposes and has unique characteristics."
+    },
+    {
+      "type": "video",
+      "title": "Working with Lists and Dictionaries",
+      "url": "https://python-course.com/videos/data-structures.mp4",
+      "transcript": "Lists are ordered collections that can hold any type of data. They're mutable, meaning you can change them after creation...",
+      "duration": "12m45s"
+    },
+    {
+      "type": "example",
+      "language": "python",
+      "code": "# Lists - ordered and mutable\\nfruits = ['apple', 'banana', 'orange']\\nfruits.append('grape')\\nprint(fruits[0])  # apple\\n\\n# Dictionaries - key-value pairs\\nstudent = {\\n    'name': 'John',\\n    'age': 20,\\n    'major': 'Computer Science'\\n}\\nprint(student['name'])  # John\\n\\n# Conditional statements\\nif student['age'] >= 18:\\n    print('Adult')\\nelse:\\n    print('Minor')\\n\\n# Loops\\nfor fruit in fruits:\\n    print(f'I like {fruit}')",
+      "explanation": "This example demonstrates lists, dictionaries, conditionals, and loops - fundamental building blocks of Python programming."
+    },
+    {
+      "type": "audio",
+      "title": "Control Flow Explanation",
+      "url": "https://python-course.com/audio/control-flow.mp3"
+    },
+    {
+      "type": "image",
+      "title": "Python Data Types Hierarchy",
+      "src": "images/python-data-types.png",
+      "caption": "Visual representation of Python's built-in data types and their relationships"
+    }
+  ],
+  "summary": "We've explored Python's core data types (lists, dictionaries, strings) and control structures (if statements, loops). These concepts form the foundation for more complex programming tasks."
+}

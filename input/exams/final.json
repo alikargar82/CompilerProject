@@ -1,0 +1,76 @@
+{
+  "title": "Python Programming Final Exam",
+  "instructions": "Comprehensive final examination covering all course material. Read each question carefully and show your work.",
+  "settings": {
+    "passing_score": 70,
+    "randomize_questions": true,
+    "attempts_allowed": 1,
+    "weight": 3.0
+  },
+  "questions": [
+    {
+      "type": "multiple_choice",
+      "question": "What will be the output of: print([1, 2, 3] + [4, 5])?",
+      "options": ["[1, 2, 3, 4, 5]", "[5, 7, 8]", "Error", "[1, 2, 3] + [4, 5]"],
+      "answer": "[1, 2, 3, 4, 5]",
+      "explanation": "The + operator concatenates lists in Python."
+    },
+    {
+      "type": "essay",
+      "question": "Compare and contrast lists, tuples, and dictionaries in Python. Discuss when you would use each data structure and provide examples.",
+      "word_count": {
+        "min": 200,
+        "max": 500
+      },
+      "hint": "Consider mutability, ordering, and use cases for each data structure",
+      "explanation": "Each data structure has unique characteristics that make it suitable for different programming scenarios."
+    },
+    {
+      "type": "coding",
+      "language": "python",
+      "question": "Create a class called 'BankAccount' with methods to deposit, withdraw, and check balance. Include proper error handling for insufficient funds.",
+      "starter_code": "class BankAccount:\\n    def __init__(self, initial_balance=0):\\n        # Your code here\\n        pass\\n    \\n    def deposit(self, amount):\\n        # Your code here\\n        pass\\n    \\n    def withdraw(self, amount):\\n        # Your code here\\n        pass\\n    \\n    def get_balance(self):\\n        # Your code here\\n        pass",
+      "tests": [
+        {
+          "input": "account = BankAccount(100); account.deposit(50); account.get_balance()",
+          "expected_output": "150"
+        },
+        {
+          "input": "account = BankAccount(100); account.withdraw(30); account.get_balance()",
+          "expected_output": "70"
+        }
+      ],
+      "hint": "Use instance variables to store the balance and check for sufficient funds before withdrawing"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "In object-oriented programming, what does encapsulation refer to?",
+      "options": [
+        "Hiding internal implementation details",
+        "Creating multiple objects from a class", 
+        "Inheriting from parent classes",
+        "Overriding methods in subclasses"
+      ],
+      "answer": "Hiding internal implementation details",
+      "explanation": "Encapsulation is the principle of bundling data and methods together while hiding internal implementation details."
+    },
+    {
+      "type": "coding",
+      "language": "python",
+      "question": "Write a function that reads a text file and returns a dictionary with the count of each word in the file.",
+      "tests": [
+        {
+          "input": "File content: 'hello world hello python world'",
+          "expected_output": "{'hello': 2, 'world': 2, 'python': 1}"
+        }
+      ],
+      "hint": "Use split() to separate words and a dictionary to count occurrences"
+    },
+    {
+      "type": "short_answer",
+      "question": "What is the purpose of the '__init__' method in a Python class?",
+      "answer": "constructor",
+      "explanation": "The __init__ method is the constructor that initializes new objects when they are created."
+    }
+  ]
+}

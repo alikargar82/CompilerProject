@@ -1,0 +1,36 @@
+{
+  "type": "chapter",
+  "title": "Functions and Object-Oriented Programming",
+  "description": "Learn to write reusable code with functions and understand classes and objects",
+  "objectives": [
+    "Students can write and call functions with parameters and return values",
+    "Students understand the basics of object-oriented programming",
+    "Students can create simple classes with methods and attributes"
+  ],
+  "content": [
+    {
+      "type": "text",
+      "title": "Functions in Python",
+      "body": "Functions are reusable blocks of code that perform specific tasks. They help organize code, avoid repetition, and make programs more modular. Functions can accept parameters and return values."
+    },
+    {
+      "type": "video",
+      "title": "Creating Your First Functions",
+      "url": "https://python-course.com/videos/functions.mp4",
+      "transcript": "Functions are one of the most important concepts in programming. Let's start by defining a simple function...",
+      "duration": "15m30s"
+    },
+    {
+      "type": "example",
+      "language": "python",
+      "code": "# Function definition\\ndef greet(name, age=18):\\n    '''Greet a person with their name and age'''\\n    return f'Hello {name}, you are {age} years old!'\\n\\n# Function calls\\nmessage1 = greet('Alice', 25)\\nmessage2 = greet('Bob')  # uses default age\\nprint(message1)\\nprint(message2)\\n\\n# Class definition\\nclass Student:\\n    def __init__(self, name, major):\\n        self.name = name\\n        self.major = major\\n        self.courses = []\\n    \\n    def enroll(self, course):\\n        self.courses.append(course)\\n        return f'{self.name} enrolled in {course}'\\n\\n# Creating objects\\nstudent1 = Student('John', 'Computer Science')\\nresult = student1.enroll('Python Programming')\\nprint(result)",
+      "explanation": "This example shows function definition with parameters and default values, docstrings, and a basic class with constructor and methods."
+    },
+    {
+      "type": "audio",
+      "title": "Object-Oriented Programming Concepts",
+      "url": "https://python-course.com/audio/oop-concepts.mp3"
+    }
+  ],
+  "summary": "Functions help organize code into reusable blocks. Classes and objects allow us to model real-world entities and their behaviors, forming the foundation of object-oriented programming."
+}

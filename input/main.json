@@ -1,0 +1,82 @@
+{
+  "name": "Introduction to Python Programming",
+  "author": "Dr. Sarah Chen",
+  "description": "A comprehensive course covering Python fundamentals, data structures, and object-oriented programming",
+  "level": "beginner",
+  "tags": ["python", "programming", "data-structures", "oop", "beginner-friendly"],
+  
+  "student_data": {
+    "roster_file": "students/roster.csv",
+    "capacity": 150,
+    "classes_file": "students/classes.json",
+    "enrollment_mode": "open"
+  },
+  
+  "flow": [
+    {
+      "type": "registration",
+      "modes": ["form"]
+    },
+    {
+      "type": "chapter",
+      "title": "Getting Started with Python",
+      "description": "Introduction to Python syntax, variables, and basic operations",
+      "objectives": [
+        "Students can write basic Python programs",
+        "Students understand Python syntax and data types",
+        "Students can use variables and perform basic operations"
+      ],
+      "content": [
+        {
+          "type": "text",
+          "title": "What is Python?",
+          "body": "Python is a high-level, interpreted programming language known for its simplicity and readability. Created by Guido van Rossum in 1991, Python emphasizes code readability and allows programmers to express concepts in fewer lines of code."
+        },
+        {
+          "type": "video",
+          "title": "Python Installation and Setup",
+          "url": "https://python-course.com/videos/setup.mp4",
+          "transcript": "Welcome to Python programming! In this video, we'll install Python and set up your development environment...",
+          "duration": "8m15s"
+        },
+        {
+          "type": "example",
+          "language": "python",
+          "code": "# Your first Python program\\nprint(\\\"Hello, World!\\\")\\n\\n# Variables and data types\\nname = \\\"Alice\\\"\\nage = 25\\nheight = 5.6\\nis_student = True\\n\\nprint(f\\\"Name: {name}, Age: {age}\\\")",
+          "explanation": "This example shows basic Python syntax: comments, print statements, variables, and string formatting."
+        }
+      ],
+      "summary": "Python is a beginner-friendly language with clean syntax. We've learned about variables, basic data types, and how to run our first Python program."
+    },
+    {
+      "type": "chapter",
+      "ref": "chapters/chapter1.json",
+      "modes": ["video", "text"]
+    },
+    {
+      "type": "quiz", 
+      "ref": "quizzes/quiz1.json",
+      "modes": ["mcq"]
+    },
+    {
+      "type": "chapter",
+      "ref": "chapters/chapter2.json", 
+      "modes": ["text", "video"]
+    },
+    {
+      "type": "exam",
+      "ref": "exams/midterm.json",
+      "modes": ["mcq", "coding"]
+    },
+    {
+      "type": "resource",
+      "ref": "resources/resource1.json",
+      "modes": ["file", "link"]
+    },
+    {
+      "type": "exam",
+      "ref": "exams/final.json",
+      "modes": ["mcq", "essay", "coding"]
+    }
+  ]
+}
