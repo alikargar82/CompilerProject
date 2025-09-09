@@ -904,20 +904,19 @@ def submit_quiz_answer(student_id: str, quiz_number: int, answer: str) -> str:
     
     session_id, current_q, total_questions = session_result
     
-    # Get quiz and question information from database
+    # Get quiz information from database
     cursor.execute("""
-        SELECT q.id, qu.passing_score FROM quiz_sessions qs
+        SELECT qu.id, qu.passing_score FROM quiz_sessions qs
         JOIN quizzes qu ON qs.quiz_number = qu.quiz_number
-        JOIN questions q ON qu.id = q.quiz_id
-        WHERE qs.id = ? AND q.question_number = ?
-    """, (session_id, current_q))
+        WHERE qs.id = ?
+    """, (session_id,))
     
-    question_result = cursor.fetchone()
-    if not question_result:
+    quiz_result = cursor.fetchone()
+    if not quiz_result:
         conn.close()
-        return "Question not found."
+        return "Quiz not found."
     
-    quiz_id, passing_score = question_result
+    quiz_id, passing_score = quiz_result
     
     # Get current question details
     cursor.execute("""

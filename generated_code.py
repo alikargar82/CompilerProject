@@ -6,13 +6,13 @@ from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
 from datetime import datetime
 
-mcp = FastMCP("Introduction to Python Programming")
+mcp = FastMCP("History Course")
 
 # Database setup
 DB_PATH = "course_data.db"
 
 # Default path to main course file (override with env var COURSE_MAIN_JSON)
-MAIN_JSON_PATH = os.environ.get("COURSE_MAIN_JSON", "D:\\UNI_4032\\CD\\FinalProject\\sidshit\\CompilerProject\\input\\main.json")
+MAIN_JSON_PATH = os.environ.get("COURSE_MAIN_JSON", "D:\\UNI_4032\\CD\\FinalProject\\Final_I_swear\\CompilerProject\\input_test\\main.json")
 
 def _safe_read_json(file_path: str) -> Optional[Dict[str, Any]]:
     try:
@@ -48,10 +48,10 @@ def load_course_from_files(main_json_path: str) -> Dict[str, Any]:
     # Metadata
     meta = main_data.get('course_introduction') or {}
     course['metadata'] = {
-        'name': meta.get('name', "Introduction to Python Programming"),
-        'author': meta.get('author', "Dr. Sarah Chen"),
-        'description': meta.get('description', "A comprehensive course covering Python fundamentals, data structures, and object-oriented programming"),
-        'level': meta.get('level', "beginner"),
+        'name': meta.get('name', "History Course"),
+        'author': meta.get('author', "Arzhang Amirfazli"),
+        'description': meta.get('description', "A sophisticated history course."),
+        'level': meta.get('level', "Super Advanced"),
         'tags': meta.get('tags', [])
     }
 
@@ -372,7 +372,7 @@ init_database()
 
 @mcp.tool()
 def register_student(name: str, student_id: str) -> str:
-    """Register a student for Introduction to Python Programming"""
+    """Register a student for History Course"""
     # Ensure database is initialized
     init_database()
     
@@ -384,7 +384,7 @@ def register_student(name: str, student_id: str) -> str:
     
     if existing:
         conn.close()
-        return f"Welcome back, {name}! You're already registered for Introduction to Python Programming."
+        return f"Welcome back, {name}! You're already registered for History Course."
     else:
         cursor.execute("""
             INSERT INTO students (student_id, name, last_activity)
@@ -392,7 +392,7 @@ def register_student(name: str, student_id: str) -> str:
         """, (student_id, name, datetime.now().isoformat()))
         conn.commit()
         conn.close()
-        return f"Welcome to Introduction to Python Programming, {name}! Registration successful."
+        return f"Welcome to History Course, {name}! Registration successful."
 
 @mcp.tool()
 def get_course_info() -> str:
@@ -402,8 +402,8 @@ def get_course_info() -> str:
     
     # Get course metadata (loaded from main.json when initializing)
     md = load_course_from_files(MAIN_JSON_PATH).get('metadata', {})
-    course_name_local = md.get('name', "Introduction to Python Programming")
-    author_local = md.get('author', "Dr. Sarah Chen")
+    course_name_local = md.get('name', "History Course")
+    author_local = md.get('author', "Arzhang Amirfazli")
     description = md.get('description', '') or "A comprehensive course"
     level = md.get('level', '') or "beginner"
     
@@ -636,20 +636,19 @@ def submit_quiz_answer(student_id: str, quiz_number: int, answer: str) -> str:
     
     session_id, current_q, total_questions = session_result
     
-    # Get quiz and question information from database
+    # Get quiz information from database
     cursor.execute("""
-        SELECT q.id, qu.passing_score FROM quiz_sessions qs
+        SELECT qu.id, qu.passing_score FROM quiz_sessions qs
         JOIN quizzes qu ON qs.quiz_number = qu.quiz_number
-        JOIN questions q ON qu.id = q.quiz_id
-        WHERE qs.id = ? AND q.question_number = ?
-    """, (session_id, current_q))
+        WHERE qs.id = ?
+    """, (session_id,))
     
-    question_result = cursor.fetchone()
-    if not question_result:
+    quiz_result = cursor.fetchone()
+    if not quiz_result:
         conn.close()
-        return "Question not found."
+        return "Quiz not found."
     
-    quiz_id, passing_score = question_result
+    quiz_id, passing_score = quiz_result
     
     # Get current question details
     cursor.execute("""
@@ -805,7 +804,7 @@ def get_student_progress(student_id: str) -> str:
     
     # Get course metadata from files
     md = load_course_from_files(MAIN_JSON_PATH).get('metadata', {})
-    course_name_local = md.get('name', "Introduction to Python Programming")
+    course_name_local = md.get('name', "History Course")
     
     # Get course structure counts
     cursor.execute("SELECT COUNT(*) FROM chapters")
