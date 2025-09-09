@@ -36,7 +36,7 @@ def main(arguments):
 	with open('generated_code.py', 'w', encoding='utf-8') as mcp_output:
 		mcp_output.write(final_code)
 		
-	print("\nCode generated successfully! Check 'generated_course.py' and 'generated_code.py'")
+	print("\nCode generated successfully!")
 
 
 if __name__ == '__main__':

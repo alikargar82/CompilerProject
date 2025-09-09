@@ -404,7 +404,8 @@ def init_database():
             options TEXT,
             hint TEXT,
             explanation TEXT,
-            FOREIGN KEY (quiz_id) REFERENCES quizzes(id)
+            FOREIGN KEY (quiz_id) REFERENCES quizzes(id),
+            UNIQUE(quiz_id, question_number)
         )
     """)
     
@@ -434,7 +435,8 @@ def init_database():
             options TEXT,
             hint TEXT,
             explanation TEXT,
-            FOREIGN KEY (exam_id) REFERENCES exams(id)
+            FOREIGN KEY (exam_id) REFERENCES exams(id),
+            UNIQUE(exam_id, question_number)
         )
     """)
     
@@ -525,9 +527,14 @@ def init_database():
     
     conn.commit()
     
-    # Load and populate course content from files
-    course = load_course_from_files(MAIN_JSON_PATH)
-    populate_course_content(cursor, conn, course)
+    # Check if database has already been populated to avoid duplicate data
+    cursor.execute("SELECT COUNT(*) FROM quizzes")
+    quiz_count = cursor.fetchone()[0]
+    
+    if quiz_count == 0:
+        # Load and populate course content from files only if not already populated
+        course = load_course_from_files(MAIN_JSON_PATH)
+        populate_course_content(cursor, conn, course)
     
     conn.close()
 
